@@ -16,8 +16,6 @@ var authController = require('./controllers/authController');
 var fileController = require('./controllers/fileController');
 var loginController = require('./controllers/loginController');
 
-
-
 var app = express();
 
 // view engine setup
@@ -36,8 +34,8 @@ app.use('/', routes);
 app.use('/login',login);
 app.use('/users', users);
 
-controllerEngine.binding('/', 'auth',authController);
-//controllerEngine.binding('/','auth' ,loginController);
+controllerEngine.binding('/', 'authController', authController);
+controllerEngine.binding('/login', 'loginController', loginController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

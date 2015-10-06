@@ -3,23 +3,30 @@
  * Handle the necessary logic after the user has login success,
  */
 
-var loginController = {};
+var file = require('./fileController');
+var config = require('../config');
 
-function load()
-{
+function load() {
 
 }
 
-function save()
-{
+function save() {
 
 }
 
 // when program startup.load the necessary information for user
-loginController.loadAndSaveNecessary = function ()
-{
+loadAndSaveNecessary = function () {
     load();
     save();
-}
+};
+
+
+var loginController = {
+
+    onLogin: function (username, pwd) {
+        var date = new Date();
+        file.updateFile(config.authorizationPath, [username, pwd, date.toString()], config.authorizationTemplate);
+    }
+};
 
 module.exports = loginController;

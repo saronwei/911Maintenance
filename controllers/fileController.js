@@ -3,33 +3,46 @@
  */
 
 var fs = require('fs');
-var fileManager = {};
 
-fileManager.createFile = function(path)
-{
-    var exist = fs.existsSync(path);
-    if(!exist){
-        fs.open(path,'w'
-            ,function(err,fd){
-                if(err){
-                    return console.error(err);
-                }
-                console.log('file has created');
-            });
+String.prototype.format = function (arguments) {
+    var formatted = this;
+    for (var i = 0, l = arguments.length; i < l; i++) {
+        //if (regexp == null || regexp.length == 0) {
+        var regexp = new RegExp('\\{' + i + '\\}', 'gi');
+        //}
+        formatted = formatted.replace(regexp, arguments[i]);
     }
-}
+    return formatted;
+};
 
-fileManager.updateFile = function (path,data,template) {
+var fileManager = {
 
-}
+    createFile: function (path) {
+        var exist = fs.existsSync(path);
+        if (!exist) {
+            fs.open(path, 'w'
+                , function (err, fd) {
+                    if (err) {
+                        return console.error(err);
+                    }
+                    console.log('file has created');
+                });
+        }
+    },
 
-fileManager.readFile = function(path)
-{
-    var exist = fs.existsSync(path);
-    if(!exist) return null;
+    updateFile: function (path, arguments, template) {
+        var data = template.format(arguments);
+        fs.writeFileSync(path, data);
+        console.log('operation update complete');
+    },
 
-    return fs.readFileSync(path);
-    console.log('operation read complete');
-}
+    readFile: function (path) {
+        var exist = fs.existsSync(path);
+        if (!exist) return null;
+
+        return fs.readFileSync(path);
+        console.log('operation read complete');
+    }
+};
 
 module.exports = fileManager;
