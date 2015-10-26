@@ -1,6 +1,7 @@
 /**
  * Created by Saron on 2015/10/1.
  */
+'use strict';
 
 var fs = require('fs');
 
