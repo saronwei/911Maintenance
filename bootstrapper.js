@@ -2,7 +2,7 @@
  * Created by Saron on 2015/9/28.
  */
 var app = require('app');  // Module to control application life.
-var fileManager = require('./controllers/fileController');
+//var fileManager = require('./app/core/file/file_controller');
 var config = require('./config');
 
 //require('electron-debug')();
@@ -31,14 +31,14 @@ app.on('ready', function () {
 
     // when program startup, first to create a local authorization file
     // through this file.the program can charge the permission of the user to use de program
-    fileManager.createFile(config.authorizationPath);
+    //fileManager.createFile(config.authorizationPath);
 
     // Create the browser window.
     mainWindow = new BrowserWindow({width: 800, height: 600});
 
     // and load the index.html of the app.
-    mainWindow.loadUrl('http://localhost:3000');
-    //mainWindow.loadUrl('file://' + __dirname + '/views/index.ejs');
+    //mainWindow.loadUrl('http://localhost:3000');
+    mainWindow.loadUrl('file://' + __dirname + '/app/core/home/home.html');
 
     // Open the DevTools.
     mainWindow.openDevTools();
