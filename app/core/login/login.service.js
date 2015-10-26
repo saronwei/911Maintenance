@@ -2,10 +2,12 @@
 
     'use strict';
 
-    angular.module('911MaintenanceApp.Authentication')
-        .factory('LoginService', ['$http', LoginService]);
+    angular.module('911MaintenanceApp.Authentication').factory('LoginService', LoginService);
 
-    function LoginService( $http) {
+    LoginService.$inject = ['$http'];
+
+    /* @ngInject */
+    function LoginService($http) {
 
         // define the interface of the service, must define the service like this style
         return {
@@ -13,7 +15,8 @@
         };
 
         function check(username, pwd) {
-            return $http.get('/api/login');
+            //return $http.get('/api/login');
+            return false;
         }
 
 

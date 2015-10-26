@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="911MaintenanceApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>911 Maintenance App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../app.css">
+</head>
+<body>
+<ul class="menu">
+    <!--<li><a href="#/">Index</a></li>-->
+    <li><a href="#/Configure">Configuration</a></li>
+    <li><a href="#/Login">Login</a></li>
+</ul>
+
+<div ng-view></div>
+
+<div>Angular seed app: v<span app-version></span></div>
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+
+
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="../../bower_components/angular-route/angular-route.js"></script>
+<script src="../../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../../bower_components/angular-aria/angular-aria.js"></script>
+<script src="../../bower_components/angular-material/angular-material.js"></script>
+
+<script src="../../components/version/version.js"></script>
+<script src="../../components/version/version-directive.js"></script>
+<script src="../../components/version/interpolate-filter.js"></script>
+
+
+<script src="../../app.js"></script>
+
+<script src="../../modules/configure.module.js"></script>
+<script src="../../core/configure/configure.service.js"></script>
+<script src="../../core/configure/configure.controller.js"></script>
+
+<script src="../../modules/authentication.module.js"></script>
+<script src="../../core/login/login.service.js"></script>
+<script src="../../core/login/login.controller.js"></script>
+
+<script src="home.controller.js"></script>
+
+<!--<script src="../../core/file/file.service.js"></script>-->
+<!--<script src="../../core/file/file.controller.js"></script>-->
+
+</body>
+</html>
