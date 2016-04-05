@@ -2,8 +2,6 @@
  * Created by Saron on 2015/9/28.
  */
 var app = require('app');  // Module to control application life.
-//var fileManager = require('./app/core/file/file_controller');
-var config = require('./config');
 
 //require('electron-debug')();
 var BrowserWindow = require('browser-window');  // Module to create native browser window.

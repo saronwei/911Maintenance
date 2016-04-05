@@ -1,0 +1,11 @@
+[
+  {
+    "group_name": "Common Inspections",
+    "inspection_collection": [
+      {
+        "aliasname": "memoryRead",
+        "ipAddress": ""
+      }
+    ]
+  }
+]
