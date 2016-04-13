@@ -8,20 +8,22 @@ var router = express.Router();
 router.use('/', function (req, res, next) {
 
     var event = require('../../../framework/event/event.provider');
-    event.Listen("onInspectionEnd", function () {
+
+    function onInspectionEnd(result) {
         // todo : send the inspection results to the client
-        res.send({
-            "message": "inspection is run over"
-        });
-    });
+        res.send(result);
+        event.CancelListen("onInspectionEnd", onInspectionEnd);
+    }
+
+    event.Listen("onInspectionEnd", onInspectionEnd);
 
     var service = require('./inspection.service')();
     if (service.hasOwnProperty(req.query.api)) {
-        service[req.query.api]({
-            "center": "quito",
-            "groupName": "Common Inspections"
-        });
+        service[req.query.api](req.query);
     }
+
+    service = null;
+    event = null;
 
 });
 

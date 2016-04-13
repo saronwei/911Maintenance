@@ -98,22 +98,24 @@ function InspectionManager(center) {
             for (var i in inspections) {
                 //noinspection JSUnusedAssignment
                 if (utils.isNullOrUndefined(current)) {
-                    current = inspections[i];
+                    current = inspections[i].inspection;
                 }
                 if (i < inspections.length - 1) {
-                    next = inspections[i + 1];
+                    next = inspections[i + 1].inspection;
                     current = next(current);
                 }
             }
         }
 
         if (!utils.isNullOrUndefined(current)
-            && current.inspection.prototype
-            && current.inspection.prototype.hasOwnProperty('Run')) {
-            current.inspection.prototype.Run();
+            && current.prototype
+            && current.prototype.hasOwnProperty('Run')) {
+            current.prototype.Run();
         }
         else {
-            return false;
+            var error = new Error("Cannot run the inspection by group: [" + groupName + "] because there has no inspection item yet");
+            error.status = 412;
+            throw error;
         }
     }
 }

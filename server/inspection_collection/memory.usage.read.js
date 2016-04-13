@@ -37,7 +37,9 @@ function MemoryUsageRead(next) {
         // at last i suppose that every logic should be use the callback to return the inspection result
         if (isFinal) {
             var event = require('../../framework/event/event.provider');
-            event.Publish("onInspectionEnd", 123);
+            event.Publish("onInspectionEnd", {
+                "memory": 0.23
+            });
         }
 
         if (inspection.prototype.Verification(next)) {

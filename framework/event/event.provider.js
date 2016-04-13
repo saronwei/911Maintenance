@@ -8,7 +8,11 @@ function GlobalEventEmitter() {
     var event = new EventEmitter();
 
     return {
+        Provider: event,
         Listen: event.on,
+        ListenOnce: event.once,
+        CancelListen: event.removeListener,
+        CancelAll: event.removeAllListeners,
         Publish: event.emit
     }
 }

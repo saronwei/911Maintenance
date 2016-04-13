@@ -4,6 +4,9 @@
 
 function BaseModule() {
 
+    var isEnable = true;
+    var utils = require('util');
+
     return {
         RouteManager: require('../route/route.manage')(),
         SetEnable: setEnable,
@@ -12,10 +15,13 @@ function BaseModule() {
     };
 
     function setEnable(value) {
+        if (utils.isBoolean(value)) {
+            isEnable = value;
+        }
     }
 
     function getEnable() {
-        return true;
+        return isEnable;
     }
 
     function initialize(app) {

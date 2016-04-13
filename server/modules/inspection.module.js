@@ -21,6 +21,7 @@ function InspectionModule() {
             "/api/inspection/run", require('../routes/inspection/inspection.route'));
 
         instance.prototype.RouteManager = null;
+        app = null;
     };
 
     return instance;
