@@ -42,7 +42,7 @@ function InspectionManager(center) {
 
     function organizeInspections() {
 
-        var inspectionCollection = require('../../server/storage/inspection.collection');
+        var inspectionCollection = require('../../../server/storage/inspection.collection');
         var inspectionPath = path.join(process.cwd(), 'server/inspection_collection/');
         var collection = fs.readdirSync(inspectionPath);
 
@@ -88,7 +88,7 @@ function InspectionManager(center) {
     function runGroup(groupName) {
 
         var current, next = null;
-        var inspectionCollection = require('../../server/storage/inspection.collection');
+        var inspectionCollection = require('../../../server/storage/inspection.collection');
 
         var inspections = linq.from(inspectionCollection.GetInspections()).where(function (item) {
             return item.groupName == groupName;

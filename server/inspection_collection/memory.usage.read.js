@@ -13,7 +13,7 @@ function MemoryUsageRead(next) {
 
     var inspection;
     var utils = require('util');
-    var BaseInspection = require('../../framework/inspection/base.inspection');
+    var BaseInspection = require('../../framework/business/inspection/base.inspection');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {

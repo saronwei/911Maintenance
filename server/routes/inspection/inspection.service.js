@@ -27,7 +27,7 @@ function InspectionService() {
 
         paramsCheck(params);
 
-        var inspectionManager = require('../../../framework/inspection/inspection.manage')(params.center);
+        var inspectionManager = require('../../../framework/business/inspection/inspection.manage')(params.center);
         inspectionManager.RunGroup(params.groupName);
         inspectionManager = null;
     }
