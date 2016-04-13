@@ -2,26 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6c73e54-bfea-4ba5-ba36-4a7c11607582" name="Default" comment="1. 在框架中增加了全局异常的捕获机制，避免因为未知异常而导致服务崩溃&#10;2. 新增了参数验证机制，服务可灵活配置参数验证方式，简化逻辑核心代码避免在核心代码中出现过多的参数验证代码。&#10;3. 新增了部分单例模块，实现数据在全代码范围内的共享使用。&#10;4. 新增了异常编码配置，集中规整异常类型。&#10;5. 新增了全局事件监听器，减少代码间的耦合关联。">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/error/error.factory.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/verification/base.condition.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/configs/environment/error.define.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/authorization.io" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Saron.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Saron.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/verification_collection/inspection.center.verify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/verification_collection/inspection.groupName.verify.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/www" afterPath="$PROJECT_DIR$/bin/www" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/event/event.provider.js" afterPath="$PROJECT_DIR$/framework/event/event.provider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/inspection/inspection.manage.js" afterPath="$PROJECT_DIR$/framework/inspection/inspection.manage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/module/base.module.js" afterPath="$PROJECT_DIR$/framework/module/base.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/verification/verification.provider.js" afterPath="$PROJECT_DIR$/framework/verification/verification.provider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/inspection_collection/memory.usage.read.js" afterPath="$PROJECT_DIR$/server/inspection_collection/memory.usage.read.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/modules/inspection.module.js" afterPath="$PROJECT_DIR$/server/modules/inspection.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/inspection/inspection.route.js" afterPath="$PROJECT_DIR$/server/routes/inspection/inspection.route.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/inspection/inspection.service.js" afterPath="$PROJECT_DIR$/server/routes/inspection/inspection.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/storage/inspection.collection.js" afterPath="$PROJECT_DIR$/server/storage/inspection.collection.js" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -145,7 +128,7 @@
       <file leaf-file-name="memory.usage.read.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/inspection_collection/memory.usage.read.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35279804">
+            <state vertical-scroll-proportion="0.8353511">
               <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
               <folding>
                 <element signature="n#!!doc;n#MemoryUsageRead#0" expanded="false" />
@@ -415,7 +398,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
+              <option name="myItemId" value="verification_collection" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -589,7 +572,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459888469065</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="1. 在框架中增加了全局异常的捕获机制，避免因为未知异常而导致服务崩溃&#10;2. 新增了参数验证机制，服务可灵活配置参数验证方式，简化逻辑核心代码避免在核心代码中出现过多的参数验证代码。&#10;3. 新增了部分单例模块，实现数据在全代码范围内的共享使用。&#10;4. 新增了异常编码配置，集中规整异常类型。&#10;5. 新增了全局事件监听器，减少代码间的耦合关联。">
+      <created>1460514961439</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1460514961439</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -603,15 +592,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27382752" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27382752" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3251634" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32405892" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3251634" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -932,6 +921,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.785714">
           <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1119,7 +1109,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/inspection_collection/memory.usage.read.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35279804">
+        <state vertical-scroll-proportion="0.8353511">
           <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
           <folding>
             <element signature="n#!!doc;n#MemoryUsageRead#0" expanded="false" />
