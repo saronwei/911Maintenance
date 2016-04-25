@@ -15,69 +15,80 @@ function InspectionManager(center) {
     function init() {
         var configPath = path.join(process.cwd(), "/server/configs/center_inspections/");
         readCenterInspections(configPath);
-        organizeInspections();
-
         configPath = null;
     }
 
-    function readCenterInspections(path) {
+    function readCenterInspections(place) {
 
-        var configs = fs.readdirSync(path);
+        var configs = fs.readdirSync(place);
         if (!utils.isNullOrUndefined(configs) && configs.length > 0) {
             for (var i in configs) {
                 var config = configs[i];
-                if (fs.statSync(path + config).isDirectory()) {
-                    readCenterInspections(path + config);
+                var readPath = path.join(place, config);
+                if (fs.statSync(readPath).isDirectory()) {
+                    readCenterInspections(readPath);
                 }
                 else {
                     var arr = config.split('.');
                     if (arr[0] == center) {
-                        groups = require(path + config);
+                        groups = require(readPath);
+                        readPath = null;
                         break;
                     }
                 }
+                readPath = null;
             }
         }
+        configs = null;
     }
 
-    function organizeInspections() {
+    function organizeInspections(groupName) {
 
-        var inspectionCollection = require('../../server/storage/inspection.collection');
-        var inspectionPath = path.join(process.cwd(), 'server/inspection_collection/');
-        var collection = fs.readdirSync(inspectionPath);
+        if (!utils.isNullOrUndefined(groups) && !utils.isNullOrUndefined(groupName) && groupName != "") {
 
-        if (!utils.isNullOrUndefined(groups) && !utils.isNullOrUndefined(collection) && collection.length > 0) {
-            var groupName = null;
-            for (var i in collection) {
-                var inspection = require(inspectionPath + collection[i])();
-                inspection.prototype.Configure();
-                var result = linq.from(groups).where(function (item) {
-                    for (var i in item['inspection_collection']) {
-                        var outConfig = item['inspection_collection'][i];
-                        if (inspection.aliasname == outConfig.aliasname) {
-                            groupName = item.group_name;
-                            inspection.prototype.Configure(outConfig);
-                            outConfig = null;
-                            break;
-                        }
-                        outConfig = null;
+            var inspectionCollection = require('../../server/storage/inspection.collection');
+            var inspectionPath = path.join(process.cwd(), 'server/inspection_collection/');
+            var collection = fs.readdirSync(inspectionPath);
+
+            var result = linq.from(groups).where(function (group) {
+                return group.group_name === groupName;
+            }).toArray();
+            var currentGroup = !utils.isNullOrUndefined(result) && result.length > 0 ? result[0] : null;
+            if (!utils.isNullOrUndefined(currentGroup)) {
+                var inspection = null;
+                for (var i in currentGroup.inspection_collection) {
+                    var outConfig = currentGroup.inspection_collection[i];
+                    if (outConfig.hasOwnProperty('filename') && outConfig.filename != "") {
+                        inspection = require(path.join(inspectionPath, outConfig.filename))();
                     }
-                    return !utils.isNullOrUndefined(groupName);
-                }).toArray();
-                if (result.length > 0) {
-                    var inspectionGroup = {
-                        "groupName": groupName,
-                        "inspection": inspection
-                    };
-                    inspectionCollection.PushToInspections(inspectionGroup);
-                    inspectionGroup = null;
+                    else {
+                        var r = linq.from(collection).where(function (item) {
+                            var source = require(path.join(inspectionPath, item))();
+                            //noinspection JSReferencingMutableVariableFromClosure
+                            return source.aliasname != "" && source.aliasname == outConfig.aliasname;
+                        }).toArray();
+                        if (r.length > 0) {
+                            inspection = require(path.join(inspectionPath, r[0]))();
+                        }
+                    }
+                    if (!utils.isNullOrUndefined(inspection)) {
+                        inspection.prototype.Configure(outConfig);
+                        var inspectionGroup = {
+                            "groupName": groupName,
+                            "inspection": inspection
+                        };
+                        inspectionCollection.PushToInspections(inspectionGroup);
+                        inspectionGroup = null;
+                        inspection = null;
+                    }
+                    outConfig = null;
                 }
-                inspection = null;
             }
         }
 
         groups = null;
         collection = null;
+        inspectionPath = null;
         inspectionCollection = null;
     }
 
@@ -89,12 +100,13 @@ function InspectionManager(center) {
 
         var current, next = null;
         var inspectionCollection = require('../../server/storage/inspection.collection');
+        organizeInspections(groupName);
 
         var inspections = linq.from(inspectionCollection.GetInspections()).where(function (item) {
             return item.groupName == groupName;
         }).toArray();
 
-        if (inspections.length > 0) {
+        if (utils.isArray(inspections) && inspections.length > 0) {
             for (var i in inspections) {
                 //noinspection JSUnusedAssignment
                 if (utils.isNullOrUndefined(current)) {
@@ -106,6 +118,7 @@ function InspectionManager(center) {
                 }
             }
         }
+        next = null;
 
         if (!utils.isNullOrUndefined(current)
             && current.prototype
@@ -113,8 +126,8 @@ function InspectionManager(center) {
             current.prototype.Run();
         }
         else {
-            var error = new Error("Cannot run the inspection by group: [" + groupName + "]" +
-                " because there has no inspection item yet");
+            var error = new Error("Cannot run the inspection by group: [" + groupName
+                + "] because there has no inspection item yet");
             error.status = 412;
             throw error;
         }
