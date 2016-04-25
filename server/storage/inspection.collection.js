@@ -23,19 +23,14 @@ function InspectionStore() {
 
     function pushToInspections(group) {
 
-        if (collection.length == 0) {
+        var result = linq.from(collection).where(function (item) {
+            //noinspection JSUnresolvedVariable
+            return item ? item.inspection.aliasname == group.inspection.aliasname : false;
+        }).toArray();
+        if (result.length == 0) {
             collection.push(group);
-        }
-        else {
-            var result = linq.from(collection).where(function (item) {
-                //noinspection JSUnresolvedVariable
-                return item.inspection.aliasname == group.inspection.aliasname
-            }).toArray();
-            if (result.length == 0) {
-                collection.push(group);
-            }
         }
     }
 }
 
-module.exports = InspectionStore();
+module.exports = new InspectionStore();

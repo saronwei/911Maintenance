@@ -18,17 +18,28 @@ function VerificationProvider() {
 
     function performValidation(data) {
         if (conditionCollection.length > 0) {
+            var authenticationParams = require('../../server/storage/authentication.parameters');
             for (var c in conditionCollection) {
                 var condition = conditionCollection[c];
                 if (!utils.isNullOrUndefined(condition)
                     && condition.prototype && condition.prototype.hasOwnProperty('Verify')) {
                     var result = condition.prototype.Verify(data);
-                    if (!result && condition.prototype.hasOwnProperty('DoError')) {
+                    var isCorrect = utils.isBoolean(result) ? result : result.verifyResult;
+                    if (!isCorrect && condition.prototype.hasOwnProperty('DoError')) {
                         condition.prototype.DoError();
+                        continue;
                     }
+                    if (result.hasOwnProperty('passParam')) {
+                        authenticationParams.PassParameters(result.passParam);
+                    }
+                    isCorrect = null;
+                    result = null;
                 }
                 condition = null;
             }
+            authenticationParams.ReleaseAll();
+            authenticationParams = null;
+            conditionCollection = null;
         }
     }
 }

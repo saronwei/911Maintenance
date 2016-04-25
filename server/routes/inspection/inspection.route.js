@@ -20,6 +20,8 @@ router.use('/', function (req, res, next) {
     var service = require('./inspection.service')();
     if (service.hasOwnProperty(req.query.api)) {
         service[req.query.api](req.query);
+        //var sandbox = require('../../../framework/sandbox/sandbox.launcher');
+        //sandbox(service[req.query.api], req.query).Release();
     }
 
     service = null;
