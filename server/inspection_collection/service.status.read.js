@@ -9,8 +9,8 @@ function ServiceStatusRead(next) {
 
     var inspection;
     var utils = require('util');
-    var BaseInspection = require('../../framework/business/inspection/base.inspection');
-    var inspectionresult=require('../../server/stotage/inspection.result');
+    var BaseInspection = require('../../business_framework/inspection/base.inspection');
+    var inspectionResult = require('../../server/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -52,7 +52,7 @@ function ServiceStatusRead(next) {
 			if (err == null){
 				inspection.result.add(result);
 
-                inspectionresult.fillResult(inspection);
+                inspectionResult.fillResult(inspection);
 
                 if (inspection.prototype.Verification(next)) {
                     isFinal = false;

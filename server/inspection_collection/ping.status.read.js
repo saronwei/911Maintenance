@@ -9,8 +9,8 @@ function PingStatusRead(next) {
 
     var inspection;
     var utils = require('util');
-    var BaseInspection = require('../../framework/business/inspection/base.inspection');
-    var inspectionresult=require('../../server/storage/inspection.result');
+    var BaseInspection = require('../../business_framework/inspection/base.inspection');
+    var inspectionResult = require('../../server/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -33,22 +33,21 @@ function PingStatusRead(next) {
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        for (i=0;i<=inspection.ipAddress.lengh;i++)
-        {   
-            var WmiClient=requre('wmi-client');
-            var wmi =new WmiClient({
-                username:inspection.username,
-                password:inspection.password,
-                host:inspection.ipAddress[i]
+        for (var i = 0; i <= inspection.ipAddress.lengh; i++) {
+            var WmiClient = requre('wmi-client');
+            var wmi = new WmiClient({
+                username: inspection.username,
+                password: inspection.password,
+                host: inspection.ipAddress[i]
             });
 
-            var constring='SELECT Address,PrimaryAddressResolutionStatus FROM Win32_PingStatus where Address ="'+IpAddress+'"';
-            wmi.query(constring,function (err,result){
-                if (err == null){
+            var constring = 'SELECT Address,PrimaryAddressResolutionStatus FROM Win32_PingStatus where Address ="' + IpAddress + '"';
+            wmi.query(constring, function (err, result) {
+                if (err == null) {
                     inspection.result.add(result[0].PrimaryAddressResolutionStatus);
 
-                    if(i==inspection.ipAddress.lengh-1){
-                        inspectionresult.fillResult(inspection);
+                    if (i == inspection.ipAddress.lengh - 1) {
+                        inspectionResult.fillResult(inspection);
 
                         if (inspection.prototype.Verification(next)) {
                             isFinal = false;
@@ -62,12 +61,12 @@ function PingStatusRead(next) {
                             });
                         }
                     }
-                }else{
+                } else {
                     console.log(err);
                 }
             });
 
-        }；
+        }
     };
 
     return inspection;

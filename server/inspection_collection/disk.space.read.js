@@ -8,15 +8,15 @@ function DiskSpaceRead(next) {
     }
 
     var inspection;
+    inspection.aliasname = "diskRead";
     var utils = require('util');
-    var BaseInspection = require('../../framework/business/inspection/base.inspection');
-    var inspectionResult=require('../../server/storage/inspection.rsult');
+    var BaseInspection = require('../../business_framework/inspection/base.inspection');
+    var inspectionResult = require('../../server/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the disk usage for the server";
-        inspection.aliasname = "diskRead";
         inspection.tags = ["device_resource"];
         inspection.result = null;
 
@@ -33,40 +33,36 @@ function DiskSpaceRead(next) {
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        for(i=0;i<=inspection.ipAddress.lengh-1;i++)\
+        for (var i = 0; i <= inspection.ipAddress.lengh - 1; i++)
         {
-            var WmiClient=requre('wmi-client');
-            var wmi =new WmiClient({
-                username:inspection.username,
-                password:inspection.password,
-                host:inspection.ipAddress[i]
+            var WmiClient = requre('wmi-client');
+            var wmi = new WmiClient({
+                username: inspection.username,
+                password: inspection.password,
+                host: inspection.ipAddress[i]
             });
 
-            wmi.query('SELECT Caption,FreeSpace FROM Win32_LogicalDisk where Caption ="C:"',function (err,result){
-        
-                if (err == null){
-                    inspection.result.add(result[0].FreeSpace/1073741824);
+            wmi.query('SELECT Caption,FreeSpace FROM Win32_LogicalDisk where Caption ="C:"', function (err, result) {
 
-                    if (i==inspection.ipAddress.lengh-1){
+                if (err == null) {
+                    inspection.result.add(result[0].FreeSpace / 1073741824);
+
+                    if (i == inspection.ipAddress.lengh - 1) {
 
                         inspectionResult.fillResult(inspection);
-
-                        if (inspection.prototype.Verification(next)) {
-                            isFinal = false;
-                            next.prototype.Run();
-                        };
-
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
                             event.Publish("onInspectionEnd", {
-                                    "disk": 0.23
-                                });
-                         };
-                    } 
-                }else{
-                    consoel.log(err);
-                }；  
+                                "disk": 0.23
+                            });
+                        }
+                    }
+                }
             });
+            if (inspection.prototype.Verification(next)) {
+                isFinal = false;
+                next.prototype.Run();
+            }
         }
     };
 
