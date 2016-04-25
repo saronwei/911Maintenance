@@ -79,14 +79,16 @@ function InspectionManager(center) {
                         };
                         inspectionCollection.PushToInspections(inspectionGroup);
                         inspectionGroup = null;
-                        inspection = null;
                     }
+                    inspection = null;
                     outConfig = null;
                 }
             }
         }
 
+        result = null;
         groups = null;
+        currentGroup = null;
         collection = null;
         inspectionPath = null;
         inspectionCollection = null;
@@ -119,11 +121,14 @@ function InspectionManager(center) {
             }
         }
         next = null;
+        inspections = null;
+        inspectionCollection = null;
 
         if (!utils.isNullOrUndefined(current)
             && current.prototype
             && current.prototype.hasOwnProperty('Run')) {
             current.prototype.Run();
+            current = null;
         }
         else {
             var error = new Error("Cannot run the inspection by group: [" + groupName
