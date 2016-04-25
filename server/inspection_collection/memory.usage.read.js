@@ -12,14 +12,14 @@ function MemoryUsageRead(next) {
     }
 
     var inspection;
+    inspection.aliasname = "memoryRead";
     var utils = require('util');
-    var BaseInspection = require('../../framework/business/inspection/base.inspection');
+    var BaseInspection = require('../../business_framework/inspection/base.inspection');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the memory usage for the server";
-        inspection.aliasname = "memoryRead";
         inspection.tags = ["device_resource"];
         inspection.result = null;
 

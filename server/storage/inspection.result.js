@@ -30,4 +30,4 @@ function InspectionResult() {
     }
 }
 
-module.exports = InspectionResult();
+module.exports = new InspectionResult();
