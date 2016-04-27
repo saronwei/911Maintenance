@@ -18,7 +18,7 @@ function VerificationProvider() {
 
     function performValidation(data) {
         if (conditionCollection.length > 0) {
-            var authenticationParams = require('../../server/storage/authentication.parameters');
+            var authenticationParams = require('../../public/resources/storage/authentication.parameters');
             for (var c in conditionCollection) {
                 var condition = conditionCollection[c];
                 if (!utils.isNullOrUndefined(condition)

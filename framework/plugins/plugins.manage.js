@@ -14,8 +14,8 @@ function PluginsManager() {
             "command": command
         };
         var verifyProvider = require('../verification/verification.provider')();
-        var existVerify = require('../../server/verification_collection/plugins.exist.verify')();
-        var commandVerify = require('../../server/verification_collection/plugins.command.verify')();
+        var existVerify = require('../../public/resources/verification_collection/plugins.exist.verify')();
+        var commandVerify = require('../../public/resources/verification_collection/plugins.command.verify')();
 
         verifyProvider.Attach(existVerify);
         verifyProvider.Attach(commandVerify);
@@ -34,7 +34,7 @@ function PluginsManager() {
     function commandExecute(name, command, params, callback) {
         prerequisitesCheck(name, command);
 
-        var plugins = require(path.join(process.cwd(), "server", "plugins_collection", name))();
+        var plugins = require(path.join(process.cwd(), "public", "resources", "plugins_collection", name))();
         plugins[command](params, function (err, result) {
             plugins.prototype.Release();
             plugins = null;

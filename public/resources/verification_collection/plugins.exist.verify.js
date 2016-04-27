@@ -15,7 +15,7 @@ function PluginsExistVerify() {
     var utils = require('util');
     var path = require('path');
     var pluginsName = null;
-    var BaseCondition = require('../../framework/verification/base.condition');
+    var BaseCondition = require('../../../framework/verification/base.condition.js');
     condition.prototype = new BaseCondition();
 
     condition.prototype.Verify = function verify(data) {
@@ -25,8 +25,8 @@ function PluginsExistVerify() {
         }
 
         pluginsName = data['name'];
-        var pluginsPath = path.join(process.cwd(), 'server', 'plugins_collection');
-        var plugins = require(pluginsPath + name);
+        var pluginsPath = path.join(process.cwd(), 'public', 'resources', 'plugins_collection', pluginsName);
+        var plugins = require(pluginsPath);
         return {
             "verifyResult": !utils.isNullOrUndefined(plugins),
             "passParam": {
@@ -43,8 +43,8 @@ function PluginsExistVerify() {
         if (utils.isNullOrUndefined(error)) {
             error = new Error(msg);
             error.status = 417;
-            msg = null;
         }
+        msg = null;
         pluginsName = null;
         throw error;
     };

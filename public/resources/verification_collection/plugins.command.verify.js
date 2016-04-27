@@ -13,11 +13,11 @@ function PluginsCommandVerify() {
 
     var condition;
     var utils = require('util');
-    var BaseCondition = require('../../framework/verification/base.condition');
+    var BaseCondition = require('../../../framework/verification/base.condition.js');
     condition.prototype = new BaseCondition();
 
     condition.prototype.Verify = function verify(data) {
-        var authenticationParams = require('../storage/authentication.parameters');
+        var authenticationParams = require('../storage/authentication.parameters.js');
         var widget = authenticationParams.GetParameter("plugins");
         authenticationParams = null;
         if (utils.isNullOrUndefined(data)
@@ -35,8 +35,8 @@ function PluginsCommandVerify() {
         if (error) {
             error = new Error(msg);
             error.status = 417;
-            msg = null;
         }
+        msg = null;
         throw error;
     };
 
