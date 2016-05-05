@@ -49,11 +49,6 @@ function PingStatusRead(next) {
                     if (i == inspection.ipAddress.lengh - 1) {
                         inspectionResult.fillResult(inspection);
 
-                        if (inspection.prototype.Verification(next)) {
-                            isFinal = false;
-                            next.prototype.Run();
-                        }
-
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
                             event.Publish("onInspectionEnd", {
@@ -65,6 +60,10 @@ function PingStatusRead(next) {
                     console.log(err);
                 }
             });
+            if (inspection.prototype.Verification(next)) {
+                isFinal = false;
+                next.prototype.Run();
+            }
 
         }
     };

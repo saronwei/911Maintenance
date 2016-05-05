@@ -46,12 +46,6 @@ function ServerStackStatus(next) {
                 inspection.result = stdout;
 
                 inspectionResult.fillResult(inspection);
-
-                if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
                 if (isFinal) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd", {
@@ -63,6 +57,10 @@ function ServerStackStatus(next) {
                 console.log(stderr);
             }
         }).start();
+        if (inspection.prototype.Verification(next)) {
+            isFinal = false;
+            next.prototype.Run();
+        }
 
     };
 
