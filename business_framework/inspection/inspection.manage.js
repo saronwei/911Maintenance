@@ -59,7 +59,7 @@ function InspectionManager(center) {
                 for (var i in currentGroup.inspection_collection) {
                     var outConfig = currentGroup.inspection_collection[i];
                     if (outConfig.hasOwnProperty('filename') && outConfig.filename != "") {
-                        inspection = require(path.join(inspectionPath, outConfig.filename))();
+                        inspection = require(path.join(inspectionPath, outConfig.filename));
                     }
                     else {
                         var r = linq.from(collection).where(function (item) {
@@ -68,14 +68,14 @@ function InspectionManager(center) {
                             return source.aliasname != "" && source.aliasname == outConfig.aliasname;
                         }).toArray();
                         if (r.length > 0) {
-                            inspection = require(path.join(inspectionPath, r[0]))();
+                            inspection = require(path.join(inspectionPath, r[0]));
                         }
                     }
                     if (!utils.isNullOrUndefined(inspection)) {
-                        inspection.prototype.Configure(outConfig);
                         var inspectionGroup = {
                             "groupName": groupName,
-                            "inspection": inspection
+                            "inspection": inspection,
+                            "configuration": outConfig
                         };
                         inspectionCollection.PushToInspections(inspectionGroup);
                         inspectionGroup = null;
@@ -109,14 +109,16 @@ function InspectionManager(center) {
         }).toArray();
 
         if (utils.isArray(inspections) && inspections.length > 0) {
-            for (var i in inspections) {
-                //noinspection JSUnusedAssignment
+            for (var i = 0, j = inspections.length; i < j; i++) {
+
                 if (utils.isNullOrUndefined(current)) {
-                    current = inspections[i].inspection;
+                    current = inspections[i].inspection();
+                    current.prototype.Configure(inspections[i].configuration);
                 }
                 if (i < inspections.length - 1) {
                     next = inspections[i + 1].inspection;
                     current = next(current);
+                    current.prototype.Configure(inspections[i + 1].configuration);
                 }
             }
         }
