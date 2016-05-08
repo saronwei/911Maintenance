@@ -46,8 +46,8 @@ function InspectionManager(center) {
 
         if (!utils.isNullOrUndefined(groups) && !utils.isNullOrUndefined(groupName) && groupName != "") {
 
-            var inspectionCollection = require('../../server/storage/inspection.collection');
-            var inspectionPath = path.join(process.cwd(), 'server/inspection_collection/');
+            var inspectionCollection = require('../../resources/storage/inspection.collection');
+            var inspectionPath = path.join(process.cwd(), 'server', 'inspection_collection');
             var collection = fs.readdirSync(inspectionPath);
 
             var result = linq.from(groups).where(function (group) {
@@ -59,7 +59,7 @@ function InspectionManager(center) {
                 for (var i in currentGroup.inspection_collection) {
                     var outConfig = currentGroup.inspection_collection[i];
                     if (outConfig.hasOwnProperty('filename') && outConfig.filename != "") {
-                        inspection = require(path.join(inspectionPath, outConfig.filename))();
+                        inspection = require(path.join(inspectionPath, outConfig.filename));
                     }
                     else {
                         var r = linq.from(collection).where(function (item) {
@@ -68,14 +68,14 @@ function InspectionManager(center) {
                             return source.aliasname != "" && source.aliasname == outConfig.aliasname;
                         }).toArray();
                         if (r.length > 0) {
-                            inspection = require(path.join(inspectionPath, r[0]))();
+                            inspection = require(path.join(inspectionPath, r[0]));
                         }
                     }
                     if (!utils.isNullOrUndefined(inspection)) {
-                        inspection.prototype.Configure(outConfig);
                         var inspectionGroup = {
                             "groupName": groupName,
-                            "inspection": inspection
+                            "inspection": inspection,
+                            "configuration": outConfig
                         };
                         inspectionCollection.PushToInspections(inspectionGroup);
                         inspectionGroup = null;
@@ -84,14 +84,14 @@ function InspectionManager(center) {
                     outConfig = null;
                 }
             }
-        }
 
-        result = null;
-        groups = null;
-        currentGroup = null;
-        collection = null;
-        inspectionPath = null;
-        inspectionCollection = null;
+            result = null;
+            groups = null;
+            currentGroup = null;
+            collection = null;
+            inspectionPath = null;
+            inspectionCollection = null;
+        }
     }
 
     return {
@@ -101,7 +101,7 @@ function InspectionManager(center) {
     function runGroup(groupName) {
 
         var current, next = null;
-        var inspectionCollection = require('../../server/storage/inspection.collection');
+        var inspectionCollection = require('../../resources/storage/inspection.collection');
         organizeInspections(groupName);
 
         var inspections = linq.from(inspectionCollection.GetInspections()).where(function (item) {
@@ -109,14 +109,16 @@ function InspectionManager(center) {
         }).toArray();
 
         if (utils.isArray(inspections) && inspections.length > 0) {
-            for (var i in inspections) {
-                //noinspection JSUnusedAssignment
+            for (var i = 0, j = inspections.length; i < j; i++) {
+
                 if (utils.isNullOrUndefined(current)) {
-                    current = inspections[i].inspection;
+                    current = inspections[i].inspection();
+                    current.prototype.Configure(inspections[i].configuration);
                 }
                 if (i < inspections.length - 1) {
                     next = inspections[i + 1].inspection;
                     current = next(current);
+                    current.prototype.Configure(inspections[i + 1].configuration);
                 }
             }
         }
