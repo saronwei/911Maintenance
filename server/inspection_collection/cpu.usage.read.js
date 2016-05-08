@@ -11,7 +11,7 @@ function CpuUsageRead(next) {
     inspection.aliasname = "cpuRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../server/storage/inspection.result');
+    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -34,7 +34,7 @@ function CpuUsageRead(next) {
         // at last i suppose that every logic should be use the callback to return the inspection result
 
         for (i = 0; i <= inspection.ipAddress.lengh - 1; i++) {
-            var WmiClient = requre('wmi-client');
+            var WmiClient = require('wmi-client');
             var wmi = new WmiClient({
                 username: inspection.username,
                 password: inspection.password,

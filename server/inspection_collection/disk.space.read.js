@@ -11,7 +11,7 @@ function DiskSpaceRead(next) {
     inspection.aliasname = "diskRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../server/storage/inspection.result');
+    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -35,7 +35,7 @@ function DiskSpaceRead(next) {
 
         for (var i = 0; i <= inspection.ipAddress.lengh - 1; i++)
         {
-            var WmiClient = requre('wmi-client');
+            var WmiClient = require('wmi-client');
             var wmi = new WmiClient({
                 username: inspection.username,
                 password: inspection.password,

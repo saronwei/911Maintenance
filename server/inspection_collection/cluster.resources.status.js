@@ -11,7 +11,7 @@ function ClusterResourceStatus(next) {
     inspection.aliasname = "clusterResourceStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../server/storage/inspection.result');
+    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {

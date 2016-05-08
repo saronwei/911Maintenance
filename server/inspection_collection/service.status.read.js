@@ -11,7 +11,7 @@ function ServiceStatusRead(next) {
     inspection.aliasname = "serviceRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../server/storage/inspection.result');
+    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -28,12 +28,11 @@ function ServiceStatusRead(next) {
     inspection.prototype.Run = function run() {
 
         var isFinal = true;
-
-        console.log("start run the memory usage read inspection");
+        console.log("start run the service status read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        var WmiClient=requre('wmi-client');
+        var WmiClient=require('wmi-client');
         var wmi =new WmiClient({
             username:inspection.username,
             password:inspection.password,
@@ -43,9 +42,9 @@ function ServiceStatusRead(next) {
         var constring='SELECT Name,Started FROM Win32_Service';
 		for (var i=0;i<=inspection.serviceName.length-1;i++){
 			if (i==0){
-				constring=constring+' Name = "'+NameList[i]+'"';
+				constring=constring+' Name = "'+inspection.serviceName[i]+'"';
 			}else{
-				constring+=' or Name ="'+NameList[i]+'"';
+				constring+=' or Name ="'+inspection.serviceName[i]+'"';
 			}
 		}
 		wmi.query(constring,function (err,result){
@@ -69,11 +68,10 @@ function ServiceStatusRead(next) {
             isFinal = false;
             next.prototype.Run();
         }
-
-
     };
 
     return inspection;
+    NameList-null;
 }
 
 module.exports = ServiceStatusRead;

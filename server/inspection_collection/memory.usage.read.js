@@ -15,7 +15,7 @@ function MemoryUsageRead(next) {
     inspection.aliasname = "memoryRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionresult=require('../../server/storage/inspection.result');
+    var inspectionresult=require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -37,9 +37,9 @@ function MemoryUsageRead(next) {
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        for (i=0;inspection.ipAddress.length;i++)
+        for (i=0;i<=inspection.ipAddress.length-1;i++)
         {
-            var WmiClient=requre('wmi-client');
+            var WmiClient=require('wmi-client');
             var wmi =new WmiClient({
                 username:inspection.username,
                 password:inspection.password,

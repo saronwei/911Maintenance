@@ -11,7 +11,7 @@ function PingStatusRead(next) {
     inspection.aliasname = "pingStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../server/storage/inspection.result');
+    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -33,8 +33,8 @@ function PingStatusRead(next) {
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        for (var i = 0; i <= inspection.ipAddress.lengh; i++) {
-            var WmiClient = requre('wmi-client');
+        for (var i = 0; i <= inspection.ipAddress.lengh-1; i++) {
+            var WmiClient = require('wmi-client');
             var wmi = new WmiClient({
                 username: inspection.username,
                 password: inspection.password,
