@@ -60,11 +60,11 @@ function PingStatusRead(next) {
                     console.log(err);
                 }
             });
-            if (inspection.prototype.Verification(next)) {
-                isFinal = false;
-                next.prototype.Run();
-            }
+        }
 
+        if (inspection.prototype.Verification(next)) {
+            isFinal = false;
+            next.prototype.Run();
         }
     };
 
