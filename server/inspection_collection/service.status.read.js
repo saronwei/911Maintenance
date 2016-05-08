@@ -8,6 +8,7 @@ function ServiceStatusRead(next) {
     }
 
     var inspection;
+    inspection.aliasname = "serviceRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     var inspectionResult = require('../../server/storage/inspection.result');
@@ -16,7 +17,6 @@ function ServiceStatusRead(next) {
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the memory status for the server";
-        inspection.aliasname = "serviceRead";
         inspection.tags = ["device_resource"];
         inspection.result = null;
 
@@ -54,12 +54,6 @@ function ServiceStatusRead(next) {
 
                 inspectionResult.fillResult(inspection);
 
-                if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
-
                 if (isFinal) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd", {
@@ -70,6 +64,12 @@ function ServiceStatusRead(next) {
                 console.log(err);
             }
 		});
+
+        if (inspection.prototype.Verification(next)) {
+            isFinal = false;
+            next.prototype.Run();
+        }
+
 
     };
 

@@ -47,11 +47,6 @@ function ClusterResourceStatus(next) {
 
                 inspectionResult.fillResult(inspection);
 
-                if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
                 if (isFinal) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd", {
@@ -63,6 +58,11 @@ function ClusterResourceStatus(next) {
                 console.log(stderr);
             }
         }).start();
+
+        if (inspection.prototype.Verification(next)) {
+            isFinal = false;
+            next.prototype.Run();
+        }
 
     };
 

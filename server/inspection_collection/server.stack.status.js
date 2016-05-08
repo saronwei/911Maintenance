@@ -8,6 +8,7 @@ function ServerStackStatus(next) {
     }
 
     var inspection;
+    inspection.aliasname = "serverstackStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     var inspectionResult = require('../../server/storage/inspection.result');
@@ -16,7 +17,6 @@ function ServerStackStatus(next) {
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the server stack status for the oracle";
-        inspection.aliasname = "serverstackStatus";
         inspection.tags = ["oracle_resource"];
         inspection.result = null;
 
@@ -46,12 +46,6 @@ function ServerStackStatus(next) {
                 inspection.result = stdout;
 
                 inspectionResult.fillResult(inspection);
-
-                if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
                 if (isFinal) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd", {
@@ -63,6 +57,10 @@ function ServerStackStatus(next) {
                 console.log(stderr);
             }
         }).start();
+        if (inspection.prototype.Verification(next)) {
+            isFinal = false;
+            next.prototype.Run();
+        }
 
     };
 

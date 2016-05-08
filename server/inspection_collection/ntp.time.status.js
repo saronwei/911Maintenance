@@ -8,6 +8,7 @@ function NTPTimeServiceStatus(next) {
     }
 
     var inspection;
+    inspection.aliasname = "timeSyncStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     var inspectionResult = require('../../server/storage/inspection.result');
@@ -16,7 +17,7 @@ function NTPTimeServiceStatus(next) {
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the NTP Time service status for the oracle";
-        inspection.aliasname = "timeSyncStatus";
+
         inspection.tags = ["oracle_resource"];
         inspection.result = null;
 
@@ -45,12 +46,6 @@ function NTPTimeServiceStatus(next) {
         		inspection.result=stdout;
 
                 inspectionResult.fillResult(inspection);
-
-        		if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
 		        if (isFinal) {
 		            var event = require('../../framework/event/event.provider');
 		            event.Publish("onInspectionEnd", {
@@ -62,6 +57,11 @@ function NTPTimeServiceStatus(next) {
         		console.log(stderr);
         	}
         }).start();
+
+        if (inspection.prototype.Verification(next)) {
+            isFinal = false;
+            next.prototype.Run();
+        }
 
     };
 

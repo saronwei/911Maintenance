@@ -8,6 +8,7 @@ function PingStatusRead(next) {
     }
 
     var inspection;
+    inspection.aliasname = "pingStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     var inspectionResult = require('../../server/storage/inspection.result');
@@ -16,7 +17,6 @@ function PingStatusRead(next) {
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the memory usage for the server";
-        inspection.aliasname = "pingStatus";
         inspection.tags = ["device_resource"];
         inspection.result = null;
 
@@ -49,11 +49,6 @@ function PingStatusRead(next) {
                     if (i == inspection.ipAddress.lengh - 1) {
                         inspectionResult.fillResult(inspection);
 
-                        if (inspection.prototype.Verification(next)) {
-                            isFinal = false;
-                            next.prototype.Run();
-                        }
-
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
                             event.Publish("onInspectionEnd", {
@@ -65,7 +60,11 @@ function PingStatusRead(next) {
                     console.log(err);
                 }
             });
+        }
 
+        if (inspection.prototype.Verification(next)) {
+            isFinal = false;
+            next.prototype.Run();
         }
     };
 
