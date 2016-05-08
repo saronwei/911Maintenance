@@ -15,7 +15,7 @@ function PluginsExistVerify() {
     var utils = require('util');
     var path = require('path');
     var pluginsName = null;
-    var BaseCondition = require('../../../framework/verification/base.condition.js');
+    var BaseCondition = require('../../framework/verification/base.condition.js');
     condition.prototype = new BaseCondition();
 
     condition.prototype.Verify = function verify(data) {

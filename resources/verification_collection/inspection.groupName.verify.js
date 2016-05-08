@@ -13,7 +13,7 @@ function InspectionGroupNameVerify() {
 
     var condition;
     var utils = require('util');
-    var BaseCondition = require('../../../framework/verification/base.condition');
+    var BaseCondition = require('../../framework/verification/base.condition');
     condition.prototype = new BaseCondition();
 
     condition.prototype.Verify = function verify(data) {

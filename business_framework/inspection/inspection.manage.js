@@ -46,7 +46,7 @@ function InspectionManager(center) {
 
         if (!utils.isNullOrUndefined(groups) && !utils.isNullOrUndefined(groupName) && groupName != "") {
 
-            var inspectionCollection = require('../../public/resources/storage/inspection.collection');
+            var inspectionCollection = require('../../resources/storage/inspection.collection');
             var inspectionPath = path.join(process.cwd(), 'server', 'inspection_collection');
             var collection = fs.readdirSync(inspectionPath);
 
@@ -101,7 +101,7 @@ function InspectionManager(center) {
     function runGroup(groupName) {
 
         var current, next = null;
-        var inspectionCollection = require('../../public/resources/storage/inspection.collection');
+        var inspectionCollection = require('../../resources/storage/inspection.collection');
         organizeInspections(groupName);
 
         var inspections = linq.from(inspectionCollection.GetInspections()).where(function (item) {

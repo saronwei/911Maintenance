@@ -11,8 +11,8 @@ function InspectionService() {
     function paramsCheck(params) {
 
         var verifyProvider = require('../../../framework/verification/verification.provider')();
-        var centerVerify = require('../../../public/resources/verification_collection/inspection.center.verify')();
-        var groupVerify = require('../../../public/resources/verification_collection/inspection.groupName.verify')();
+        var centerVerify = require('../.././verification_collection/inspection.center.verify')();
+        var groupVerify = require('../.././verification_collection/inspection.groupName.verify')();
 
         verifyProvider.Attach(centerVerify);
         verifyProvider.Attach(groupVerify);

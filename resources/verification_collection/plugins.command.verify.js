@@ -13,7 +13,7 @@ function PluginsCommandVerify() {
 
     var condition;
     var utils = require('util');
-    var BaseCondition = require('../../../framework/verification/base.condition.js');
+    var BaseCondition = require('../../framework/verification/base.condition.js');
     condition.prototype = new BaseCondition();
 
     condition.prototype.Verify = function verify(data) {

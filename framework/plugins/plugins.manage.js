@@ -14,8 +14,8 @@ function PluginsManager() {
             "command": command
         };
         var verifyProvider = require('../verification/verification.provider')();
-        var existVerify = require('../../public/resources/verification_collection/plugins.exist.verify')();
-        var commandVerify = require('../../public/resources/verification_collection/plugins.command.verify')();
+        var existVerify = require('../../resources/verification_collection/plugins.exist.verify')();
+        var commandVerify = require('../../resources/verification_collection/plugins.command.verify')();
 
         verifyProvider.Attach(existVerify);
         verifyProvider.Attach(commandVerify);
