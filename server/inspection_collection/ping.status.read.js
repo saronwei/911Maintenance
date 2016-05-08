@@ -8,6 +8,7 @@ function PingStatusRead(next) {
     }
 
     var inspection;
+    inspection.aliasname = "pingStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     var inspectionResult = require('../../server/storage/inspection.result');
@@ -16,7 +17,6 @@ function PingStatusRead(next) {
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the memory usage for the server";
-        inspection.aliasname = "pingStatus";
         inspection.tags = ["device_resource"];
         inspection.result = null;
 

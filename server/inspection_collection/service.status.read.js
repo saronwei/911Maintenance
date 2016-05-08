@@ -8,6 +8,7 @@ function ServiceStatusRead(next) {
     }
 
     var inspection;
+    inspection.aliasname = "serviceRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     var inspectionResult = require('../../server/storage/inspection.result');
@@ -16,7 +17,6 @@ function ServiceStatusRead(next) {
     inspection.prototype.Configure = function configure(outConfig) {
 
         inspection.description = "Read the memory status for the server";
-        inspection.aliasname = "serviceRead";
         inspection.tags = ["device_resource"];
         inspection.result = null;
 
