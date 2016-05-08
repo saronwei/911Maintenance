@@ -25,7 +25,7 @@ function InspectionStore() {
 
         var result = linq.from(collection).where(function (item) {
             //noinspection JSUnresolvedVariable
-            return item ? item.inspection.aliasname == group.inspection.aliasname : false;
+            return item ? item.inspection == group.inspection : false;
         }).toArray();
         if (result.length == 0) {
             collection.push(group);
