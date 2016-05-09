@@ -49,9 +49,7 @@ function ClusterResourceStatus(next) {
 
                 if (isFinal) {
                     var event = require('../../framework/event/event.provider');
-                    event.Publish("onInspectionEnd", {
-                        "memory": 0.23
-                    });
+                    event.Publish("onInspectionEnd",inspectionResult.GetResult());
                 }
             },
             err: function (stderr) {

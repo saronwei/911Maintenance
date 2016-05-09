@@ -48,9 +48,7 @@ function NTPTimeServiceStatus(next) {
                 inspectionResult.fillResult(inspection);
 		        if (isFinal) {
 		            var event = require('../../framework/event/event.provider');
-		            event.Publish("onInspectionEnd", {
-		                 "memory": 0.23
-		                });
+		            event.Publish("onInspectionEnd",inspectionResult.GetResult());
 		        }
         	},
         	err:function (stderr) {
