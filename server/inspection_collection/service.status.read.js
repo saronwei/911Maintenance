@@ -39,7 +39,7 @@ function ServiceStatusRead(next) {
             host:inspection.ipAddress
         });
 
-        var constring='SELECT Name,Started FROM Win32_Service';
+        var constring = 'SELECT Name,Started FROM Win32_Service WHERE ';
 		for (var i=0;i<=inspection.serviceName.length-1;i++){
 			if (i==0){
 				constring=constring+' Name = "'+inspection.serviceName[i]+'"';
@@ -49,7 +49,7 @@ function ServiceStatusRead(next) {
 		}
 		wmi.query(constring,function (err,result){
 			if (err == null){
-				inspection.result.push(result);
+                inspection.result = result;
 
                 inspectionResult.FillResult(inspection);
 

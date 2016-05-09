@@ -3,52 +3,84 @@
     "group_name": "Common Inspections",
     "inspection_collection": [
       {
+        "aliasname": "cpuRead",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.2.21"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      },
+      {
+        "aliasname": "diskRead",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.2.21"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      },
+      {
+        "aliasname": "pingStatus",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.2.21"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      },
+      {
         "aliasname": "memoryRead",
-        "ipAddress": ["10.121.6.1","10.121.2.21"],
-    	  "username":"administrator@uio.ecu911.gob",
-   	 	  "password":"cawy_cawy2012"
-      },
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.2.21"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      }
+    ]
+  },
+  {
+    "group_name": "Service Inspection",
+    "inspection_collection": [
       {
-      	"aliasname":"cpuRead",
-      	"ipAddress": ["10.121.6.1","10.121.2.21"],
-    	  "username":"administrator@uio.ecu911.gob",
-   	 	  "password":"cawy_cawy2012"
-      },
+        "aliasname": "serviceRead",
+        "ipAddress": "10.121.6.1",
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012",
+        "serviceName": [
+          "WMSVC",
+          "gpsvc"
+        ]
+      }
+    ]
+  },
+  {
+    "group_name": "Oracle Inspection",
+    "inspection_collection": [
       {
-      	"aliasname":"diskRead",
-      	"ipAddress": ["10.121.6.1","10.121.2.21"],
-    	  "username":"administrator@uio.ecu911.gob",
-   	 	  "password":"cawy_cawy2012"
-      },
-      {
-      	"aliasname":"pingStatus",
-      	"ipAddress": ["10.121.6.1","10.121.2.21"],
-    	  "username":"administrator@uio.ecu911.gob",
-   	 	  "password":"cawy_cawy2012"
-      },
-      {
-        "aliasname":"serverStackStatus",
+        "aliasname": "serverStackStatus",
         "ipAddress": "10.121.2.1",
-        "username":"root",
-        "password":"p@ssw0rd"
+        "username": "root",
+        "password": "p@ssw0rd"
       },
       {
-        "aliasname":"clusterSynStatus",
+        "aliasname": "clusterSynStatus",
         "ipAddress": "10.121.2.1",
-        "username":"root",
-        "password":"p@ssw0rd"
+        "username": "root",
+        "password": "p@ssw0rd"
       },
       {
-        "aliasname":"timeSyncStatus",
+        "aliasname": "clusterResourceStatus",
         "ipAddress": "10.121.2.1",
-        "username":"root",
-        "password":"p@ssw0rd"
+        "username": "root",
+        "password": "p@ssw0rd"
       },
       {
-        "aliasname":"clusterResourceStatus",
+        "aliasname": "timeSyncStatus",
         "ipAddress": "10.121.2.1",
-        "username":"root",
-        "password":"p@ssw0rd"
+        "username": "root",
+        "password": "p@ssw0rd"
       }
     ]
   }

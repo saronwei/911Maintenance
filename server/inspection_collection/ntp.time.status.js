@@ -41,7 +41,7 @@ function NTPTimeServiceStatus(next) {
         	pass:inspection.password
         });
 
-        ssh.exec('servcie ntpd status',{
+        ssh.exec('service ntpd status', {
         	out:function(stdout){
         		inspection.result=stdout;
 
