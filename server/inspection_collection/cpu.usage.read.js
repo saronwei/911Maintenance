@@ -50,6 +50,11 @@ function CpuUsageRead(next) {
 
                     if (j == inspection.ipAddress.length ) {
 
+                        if (inspection.prototype.Verification(next)) {
+                            isFinal = false;
+                            next.prototype.Run();
+                        }
+
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
                             event.Publish("onInspectionEnd",inspectionResult.GetResult());
@@ -59,11 +64,6 @@ function CpuUsageRead(next) {
                     console.log(err);
                 }
             });
-        }
-
-        if (inspection.prototype.Verification(next)) {
-            isFinal = false;
-            next.prototype.Run();
         }
     };
 

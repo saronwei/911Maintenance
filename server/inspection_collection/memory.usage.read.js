@@ -52,6 +52,11 @@ function MemoryUsageRead(next) {
                     inspection.result=(100-(result[0].FreePhysicalMemory/result[0].TotalVisibleMemorySize*100));
                     inspectionresult.FillResult(inspection);
                     if(j==inspection.ipAddress.length){
+
+                        if (inspection.prototype.Verification(next)) {
+                            isFinal = false;
+                            next.prototype.Run();
+                        }
         
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
@@ -63,11 +68,6 @@ function MemoryUsageRead(next) {
                 }
             });
         };
-
-        if (inspection.prototype.Verification(next)) {
-            isFinal = false;
-            next.prototype.Run();
-        }
     };
 
     return inspection;

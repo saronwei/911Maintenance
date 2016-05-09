@@ -46,6 +46,11 @@ function NTPTimeServiceStatus(next) {
         		inspection.result=stdout;
 
                 inspectionResult.FillResult(inspection);
+
+                if (inspection.prototype.Verification(next)) {
+                    isFinal = false;
+                    next.prototype.Run();
+                }
 		        if (isFinal) {
 		            var event = require('../../framework/event/event.provider');
 		            event.Publish("onInspectionEnd",inspectionResult.GetResult());
@@ -55,12 +60,6 @@ function NTPTimeServiceStatus(next) {
         		console.log(stderr);
         	}
         }).start();
-
-        if (inspection.prototype.Verification(next)) {
-            isFinal = false;
-            next.prototype.Run();
-        }
-
     };
 
     return inspection;
