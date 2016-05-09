@@ -4,55 +4,48 @@
     "inspection_collection": [
       {
         "aliasname": "memoryRead",
-        "ipAddress": ["10.121.6.1","10.121.2.10","10.121.2.21","10.121.2.22","10.121.2.25"],
+        "ipAddress": ["10.121.6.1","10.121.2.21"],
     	  "username":"administrator@uio.ecu911.gob",
    	 	  "password":"cawy_cawy2012"
       },
       {
       	"aliasname":"cpuRead",
-      	"ipAddress": ["10.121.6.1","10.121.2.10","10.121.2.21","10.121.2.22","10.121.2.25"],
+      	"ipAddress": ["10.121.6.1","10.121.2.21"],
     	  "username":"administrator@uio.ecu911.gob",
    	 	  "password":"cawy_cawy2012"
       },
       {
       	"aliasname":"diskRead",
-      	"ipAddress": ["10.121.6.1","10.121.2.10","10.121.2.21","10.121.2.22","10.121.2.25"],
+      	"ipAddress": ["10.121.6.1","10.121.2.21"],
     	  "username":"administrator@uio.ecu911.gob",
    	 	  "password":"cawy_cawy2012"
       },
       {
       	"aliasname":"pingStatus",
-      	"ipAddress": ["10.121.6.1","10.121.2.10","10.121.2.21","10.121.2.22","10.121.2.25"],
+      	"ipAddress": ["10.121.6.1","10.121.2.21"],
     	  "username":"administrator@uio.ecu911.gob",
    	 	  "password":"cawy_cawy2012"
       },
       {
-      	"aliasname":"serviceRead",
-      	"ipAddress": "10.121.6.1",
-    	  "username":"administrator@uio.ecu911.gob",
-   	 	  "password":"cawy_cawy2012",
-      	"serviceName":[]
-      },
-      {
-        "aliasname":"serverstackStatus",
+        "aliasname":"serverStackStatus",
         "ipAddress": "10.121.2.1",
         "username":"root",
         "password":"p@ssw0rd"
       },
       {
-        "aliasname":"clustersynStatus",
+        "aliasname":"clusterSynStatus",
         "ipAddress": "10.121.2.1",
         "username":"root",
         "password":"p@ssw0rd"
       },
       {
-        "aliasname":"ntptimeserviceStatus",
+        "aliasname":"timeSyncStatus",
         "ipAddress": "10.121.2.1",
         "username":"root",
         "password":"p@ssw0rd"
       },
       {
-        "aliasname":"clusterresourceStatus",
+        "aliasname":"clusterResourceStatus",
         "ipAddress": "10.121.2.1",
         "username":"root",
         "password":"p@ssw0rd"

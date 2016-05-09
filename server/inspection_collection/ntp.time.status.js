@@ -45,7 +45,7 @@ function NTPTimeServiceStatus(next) {
         	out:function(stdout){
         		inspection.result=stdout;
 
-                inspectionResult.fillResult(inspection);
+                inspectionResult.FillResult(inspection);
 		        if (isFinal) {
 		            var event = require('../../framework/event/event.provider');
 		            event.Publish("onInspectionEnd",inspectionResult.GetResult());

@@ -8,7 +8,7 @@ function ServerStackStatus(next) {
     }
 
     var inspection;
-    inspection.aliasname = "serverstackStatus";
+    inspection.aliasname = "serverStackStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     var inspectionResult = require('../../resources/storage/inspection.result');
