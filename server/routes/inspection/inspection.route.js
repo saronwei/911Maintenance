@@ -13,6 +13,7 @@ router.use('/', function (req, res, next) {
         // todo : send the inspection results to the client
         res.send(result);
         event.CancelListen("onInspectionEnd", onInspectionEnd);
+        event=null;
     }
 
     event.Listen("onInspectionEnd", onInspectionEnd);
@@ -25,7 +26,6 @@ router.use('/', function (req, res, next) {
     }
 
     service = null;
-    event = null;
 
 });
 

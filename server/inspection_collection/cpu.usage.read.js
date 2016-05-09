@@ -28,12 +28,13 @@ function CpuUsageRead(next) {
     inspection.prototype.Run = function run() {
 
         var isFinal = true;
+        var j=0;
 
         console.log("start run the cpu usage read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        for (i = 0; i <= inspection.ipAddress.lengh - 1; i++) {
+        for (var i = 0; i <= inspection.ipAddress.length - 1; i++) {
             var WmiClient = require('wmi-client');
             var wmi = new WmiClient({
                 username: inspection.username,
@@ -43,17 +44,15 @@ function CpuUsageRead(next) {
 
             wmi.query('SELECT Role,LoadPercentage FROM Win32_Processor', function (err, result) {
                 if (err == null) {
-                    inspection.result.add(result[0].LoadPercentage);
+                    j++;
+                    inspection.result=(result[0].LoadPercentage);
+                    inspectionResult.FillResult(inspection);
 
-                    if (i == inspection.ipAddress.lengh - 1) {
-
-                        inspectionResult.fillResult(inspection);
+                    if (j == inspection.ipAddress.length ) {
 
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
-                            event.Publish("onInspectionEnd", {
-                                "cpu": 0.23
-                            });
+                            event.Publish("onInspectionEnd",inspectionResult.GetResult());
                         }
                     }
                 } else {

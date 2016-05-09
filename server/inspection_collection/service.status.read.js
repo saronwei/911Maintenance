@@ -49,15 +49,13 @@ function ServiceStatusRead(next) {
 		}
 		wmi.query(constring,function (err,result){
 			if (err == null){
-				inspection.result.add(result);
+				inspection.result.push(result);
 
-                inspectionResult.fillResult(inspection);
+                inspectionResult.FillResult(inspection);
 
                 if (isFinal) {
                     var event = require('../../framework/event/event.provider');
-                    event.Publish("onInspectionEnd", {
-                        "memory": 0.23
-                    });
+                    event.Publish("onInspectionEnd",inspectionResult.GetResult());
                 }
 			}else{
                 console.log(err);

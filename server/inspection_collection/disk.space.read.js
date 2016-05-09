@@ -28,12 +28,13 @@ function DiskSpaceRead(next) {
     inspection.prototype.Run = function run() {
 
         var isFinal = true;
+        var j=0;
 
         console.log("start run the disk usage read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        for (var i = 0; i <= inspection.ipAddress.lengh - 1; i++)
+        for (var i = 0; i <= inspection.ipAddress.length - 1; i++)
         {
             var WmiClient = require('wmi-client');
             var wmi = new WmiClient({
@@ -45,16 +46,15 @@ function DiskSpaceRead(next) {
             wmi.query('SELECT Caption,FreeSpace FROM Win32_LogicalDisk where Caption ="C:"', function (err, result) {
 
                 if (err == null) {
-                    inspection.result.add(result[0].FreeSpace / 1073741824);
+                    j++
+                    inspection.result=(result[0].FreeSpace / 1073741824);
+                    inspectionResult.FillResult(inspection);
 
-                    if (i == inspection.ipAddress.lengh - 1) {
+                    if ( j== inspection.ipAddress.length ) {
 
-                        inspectionResult.fillResult(inspection);
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
-                            event.Publish("onInspectionEnd", {
-                                "disk": 0.23
-                            });
+                            event.Publish("onInspectionEnd",inspectionResult.GetResult());
                         }
                     }
                 }
