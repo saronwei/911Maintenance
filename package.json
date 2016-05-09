@@ -15,6 +15,7 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "linq": "latest",
-    "simple-ssh": "latest"
+    "simple-ssh": "latest",
+    "wmi-client": "latest"
   }
 }

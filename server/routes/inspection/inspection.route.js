@@ -10,6 +10,11 @@ router.use('/', function (req, res, next) {
     var event = require('../../../framework/event/event.provider');
 
     function onInspectionEnd(result) {
+
+        var inspectionResults = require('../../../resources/storage/inspection.result');
+        inspectionResults.Clear();
+        inspectionResults = null;
+        
         // todo : send the inspection results to the client
         res.send(result);
         event.CancelListen("onInspectionEnd", onInspectionEnd);

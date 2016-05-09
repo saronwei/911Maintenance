@@ -32,23 +32,23 @@ function ServiceStatusRead(next) {
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        var WmiClient=require('wmi-client');
-        var wmi =new WmiClient({
-            username:inspection.username,
-            password:inspection.password,
-            host:inspection.ipAddress
+        var WmiClient = require('wmi-client');
+        var wmi = new WmiClient({
+            username: inspection.username,
+            password: inspection.password,
+            host: inspection.ipAddress
         });
 
         var constring = 'SELECT Name,Started FROM Win32_Service WHERE ';
-		for (var i=0;i<=inspection.serviceName.length-1;i++){
-			if (i==0){
-				constring=constring+' Name = "'+inspection.serviceName[i]+'"';
-			}else{
-				constring+=' or Name ="'+inspection.serviceName[i]+'"';
-			}
-		}
-		wmi.query(constring,function (err,result){
-			if (err == null){
+        for (var i = 0; i <= inspection.serviceName.length - 1; i++) {
+            if (i == 0) {
+                constring = constring + ' Name = "' + inspection.serviceName[i] + '"';
+            } else {
+                constring += ' or Name ="' + inspection.serviceName[i] + '"';
+            }
+        }
+        wmi.query(constring, function (err, result) {
+            if (err == null) {
                 inspection.result = result;
 
                 inspectionResult.FillResult(inspection);
@@ -60,16 +60,15 @@ function ServiceStatusRead(next) {
 
                 if (isFinal) {
                     var event = require('../../framework/event/event.provider');
-                    event.Publish("onInspectionEnd",inspectionResult.GetResult());
+                    event.Publish("onInspectionEnd", inspectionResult.GetResult());
                 }
-			}else{
+            } else {
                 console.log(err);
             }
-		});
+        });
     };
 
     return inspection;
-    NameList-null;
 }
 
 module.exports = ServiceStatusRead;

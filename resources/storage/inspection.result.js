@@ -4,6 +4,7 @@
 
 function InspectionResult() {
 
+    var utils = require('util');
     var executeResults = [];
 
     return {
@@ -14,6 +15,9 @@ function InspectionResult() {
     };
 
     function fillResult(inspection) {
+        if (utils.isNullOrUndefined(executeResults)) {
+            initialize();
+        }
         executeResults.push(inspection);
     }
 
