@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6c73e54-bfea-4ba5-ba36-4a7c11607582" name="Default" comment="删除掉客户端angularjs 部分，后期准备采用angularjs 2.0&#10;修改巡检集合静态对象的逻辑错误。&#10;修改服务状态巡检项的内部逻辑">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_framework/inspection/base.detection.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/business_framework/inspection/inspection.result.detector.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/component/base.component.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/component/component.manage.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/component/database/database.provider.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/file/file.detector.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/storage/component.permanent.collection.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/testingBase_collection/example.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/configs/center_inspections/quito.json" afterPath="$PROJECT_DIR$/server/configs/center_inspections/quito.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/inspection_collection/disk.space.read.js" afterPath="$PROJECT_DIR$/server/inspection_collection/disk.space.read.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/inspection_collection/memory.usage.read.js" afterPath="$PROJECT_DIR$/server/inspection_collection/memory.usage.read.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/inspection_collection/ping.status.read.js" afterPath="$PROJECT_DIR$/server/inspection_collection/ping.status.read.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/inspection/inspection.route.js" afterPath="$PROJECT_DIR$/server/routes/inspection/inspection.route.js" />
+    <list default="true" id="e6c73e54-bfea-4ba5-ba36-4a7c11607582" name="Default" comment="新增巡检结果检测机制代码&#10;新增数据库组件代码和组件使用机制代码&#10;新增组件静待对象，保存长用的静态组件，避免组件初始化时间过长">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="untitled.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -117,88 +104,8 @@
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Html5" />
-        <option value="JavaScript File" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="Saronwei" />
-      </list>
-    </option>
-    <option name="UPDATE_TYPE" value="MERGE" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/app/core/home/home.html" />
-        <option value="$PROJECT_DIR$/app/core/login/login.controller.js" />
-        <option value="$PROJECT_DIR$/framework/inspection/inspection.group.manage.js" />
-        <option value="$PROJECT_DIR$/server/inspection_collection/server.memory.useage.read.js" />
-        <option value="$PROJECT_DIR$/server/center_config/quito.json" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/server/configs/common.json" />
-        <option value="$PROJECT_DIR$/server/routes/inspection/route.inspection.js" />
-        <option value="$PROJECT_DIR$/framework/verification/verification.request.js" />
-        <option value="$PROJECT_DIR$/framework/route/route.manage.js" />
-        <option value="$PROJECT_DIR$/framework/module/module.manage.js" />
-        <option value="$PROJECT_DIR$/bootstrapper.js" />
-        <option value="$PROJECT_DIR$/framework/storage/inspection.collection.js" />
-        <option value="$PROJECT_DIR$/framework/verification/request.verification.js" />
-        <option value="$PROJECT_DIR$/server/storage/inspection.result.js" />
-        <option value="$PROJECT_DIR$/framework/inspection/base.inspection.js" />
-        <option value="$PROJECT_DIR$/framework/event/eventEmitter.global.js" />
-        <option value="$PROJECT_DIR$/framework/module/base.module.js" />
-        <option value="$PROJECT_DIR$/server/verification_collection/inspection.params.verify.js" />
-        <option value="$PROJECT_DIR$/server/storage/error.define.collection.js" />
-        <option value="$PROJECT_DIR$/framework/environment/environment.provider.js" />
-        <option value="$PROJECT_DIR$/server/environmment_collection/environment.errorDefine.js" />
-        <option value="$PROJECT_DIR$/framework/environment/base.environment.js" />
-        <option value="$PROJECT_DIR$/server/configs/environment/error.define.json" />
-        <option value="internal/module.js" />
-        <option value="$PROJECT_DIR$/framework/verification/verification.provider.js" />
-        <option value="$PROJECT_DIR$/framework/event/event.provider.js" />
-        <option value="$PROJECT_DIR$/middlewares/request.handle.js" />
-        <option value="$PROJECT_DIR$/framework/verification/base.condition.js" />
-        <option value="$PROJECT_DIR$/framework/error/error.factory.js" />
-        <option value="$PROJECT_DIR$/server/verification_collection/inspection.center.verify.js" />
-        <option value="$PROJECT_DIR$/server/verification_collection/inspection.groupName.verify.js" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/bin/www" />
-        <option value="$PROJECT_DIR$/server/storage/inspection.collection.js" />
-        <option value="$PROJECT_DIR$/framework/inspection/inspection.manage.js" />
-        <option value="$PROJECT_DIR$/server/modules/inspection.module.js" />
-        <option value="$PROJECT_DIR$/server/modules/environment.module.js" />
-        <option value="$PROJECT_DIR$/server/routes/inspection/inspection.service.js" />
-        <option value="$PROJECT_DIR$/server/inspection_collection/ntp.time.status.js" />
-        <option value="$PROJECT_DIR$/server/inspection_collection/service.status.read.js" />
-        <option value="$PROJECT_DIR$/resources/storage/inspection.result.js" />
-        <option value="$PROJECT_DIR$/server/routes/inspection/inspection.route.js" />
-        <option value="$PROJECT_DIR$/framework/component/component.manage.js" />
-        <option value="$PROJECT_DIR$/server/configs/center_inspections/quito.json" />
-        <option value="$PROJECT_DIR$/server/inspection_collection/disk.space.read.js" />
-        <option value="$PROJECT_DIR$/server/inspection_collection/ping.status.read.js" />
-        <option value="$PROJECT_DIR$/server/inspection_collection/memory.usage.read.js" />
-        <option value="$PROJECT_DIR$/business_framework/inspection/base.detection.js" />
-        <option value="$PROJECT_DIR$/business_framework/inspection/inspection.result.detector.js" />
-        <option value="$PROJECT_DIR$/server/testingBase_collection/example.js" />
-      </list>
-    </option>
-  </component>
-  <component name="JsBowerSettings">
-    <exe-path>C:\Users\Saron\AppData\Roaming\npm\bower.cmd</exe-path>
-    <config-path />
-  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
-  <component name="JsBuildToolPackageJson" detection-done="true">
-    <package-json value="$PROJECT_DIR$/package.json" />
-  </component>
+  <component name="JsBuildToolPackageJson" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
@@ -371,211 +278,24 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="103" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="132" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="132" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="925" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="120" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="127" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="126" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="919" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="js-jscs-nodeInterpreter" value="F:\Program Files\nodejs\node.exe" />
-    <property name="javascript.nodejs.core.library.configured.version" value="4.2.4" />
-    <property name="SearchEverywhereHistoryKey" value="PushToInspections&#9;null&#9;null&#10;inspe&#9;FILE&#9;file://E:/Museum/Example/Try Self/911Maintenance/framework/inspection/inspection.manage.js&#10;qui&#9;FILE&#9;file://E:/Museum/Example/Try Self/911Maintenance/server/configs/center_inspections/quito.json&#10;inspection.route&#9;FILE&#9;file://E:/Museum/Example/Try Self/911Maintenance/server/routes/inspection/inspection.route.js" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Museum\Example\Try Self\911Maintenance\server" />
-      <recent name="E:\Museum\Example\Try Self\911Maintenance\server\configs" />
-      <recent name="E:\Museum\Example\ExpressJs Project\911Maintenance\app\modules" />
-      <recent name="E:\Museum\Example\ExpressJs Project\911Maintenance\app" />
-      <recent name="E:\Museum\Example\ExpressJs Project\911Maintenance\app\core\index" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Node.js.bin\www">
-    <configuration default="false" name="home.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/911Maintenance/app/core/home/home.html">
-      <method />
-    </configuration>
-    <configuration default="false" name="login.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/911Maintenance/app/core/login/login.html">
-      <method />
-    </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
-      <method />
-    </configuration>
-    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
-      <config-file value="" />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
-    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" value="" />
-      <option name="executablePath" />
-      <option name="filePath" />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
-      <scripts />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
-      <node-interpreter>F:/Program Files/nodejs/node.exe</node-interpreter>
-      <node-options />
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <envs />
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>DIRECTORY</test-kind>
-      <test-directory />
-      <recursive>false</recursive>
-      <method />
-    </configuration>
-    <list size="3">
+    <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Node.js.bin\www" />
-      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.home.html" />
-      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.login.html" />
     </list>
-    <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.home.html" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.login.html" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="e6c73e54-bfea-4ba5-ba36-4a7c11607582" name="Default" comment="" />
-      <created>1443240210809</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1443240210809</updated>
-      <workItem from="1462808427660" duration="6582000" />
-      <workItem from="1462826519495" duration="263000" />
-      <workItem from="1462829023621" duration="21000" />
-      <workItem from="1462829065282" duration="1964000" />
-      <workItem from="1462892591054" duration="10170000" />
-    </task>
-    <task id="LOCAL-00001" summary="add root">
-      <created>1444061715817</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1444061715817</updated>
-    </task>
-    <task id="LOCAL-00002" summary="1. format code&#10;2. fill the logic of loginController&#10;3. fill the logic of fileController&#10;4. add configuration file to store the static resources or information">
-      <created>1444162480163</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1444162480163</updated>
-    </task>
-    <task id="LOCAL-00003" summary="1. format code&#10;2. fill the logic of loginController&#10;3. fill the logic of fileController&#10;4. add configuration file to store the static resources or information">
-      <created>1444162560025</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1444162560025</updated>
-    </task>
-    <task id="LOCAL-00004" summary="1. format code&#10;2. fill the logic of loginController&#10;3. fill the logic of fileController&#10;4. add configuration file to store the static resources or information">
-      <created>1444162598802</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1444162598802</updated>
-    </task>
-    <task id="LOCAL-00005" summary="1. 重写了node js服务端架构，确定了node js 服务端运行的整体流程，后期所有代码均可以按照框架思路进行编写。&#10;2. 编写了node端框架部分，为node的代码编写提供便利性。&#10;3. 暂时取消登录验证工作，后期将使用OAuth 2.0实现登录授权验证的逻辑">
-      <created>1459888219906</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1459888219906</updated>
-    </task>
-    <task id="LOCAL-00006" summary="1. 重写了node js服务端架构，确定了node js 服务端运行的整体流程，后期所有代码均可以按照框架思路进行编写。&#10;2. 编写了node端框架部分，为node的代码编写提供便利性。&#10;3. 暂时取消登录验证工作，后期将使用OAuth 2.0实现登录授权验证的逻辑">
-      <created>1459888469065</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1459888469065</updated>
-    </task>
-    <task id="LOCAL-00007" summary="1. 在框架中增加了全局异常的捕获机制，避免因为未知异常而导致服务崩溃&#10;2. 新增了参数验证机制，服务可灵活配置参数验证方式，简化逻辑核心代码避免在核心代码中出现过多的参数验证代码。&#10;3. 新增了部分单例模块，实现数据在全代码范围内的共享使用。&#10;4. 新增了异常编码配置，集中规整异常类型。&#10;5. 新增了全局事件监听器，减少代码间的耦合关联。">
-      <created>1460514961439</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1460514961439</updated>
-    </task>
-    <task id="LOCAL-00008" summary="修改部分巡检项错误的问题&#10;修改巡检配置文件">
-      <created>1462812042646</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1462812042646</updated>
-    </task>
-    <task id="LOCAL-00009" summary="删除掉客户端angularjs 部分，后期准备采用angularjs 2.0&#10;修改巡检集合静态对象的逻辑错误。&#10;修改服务状态巡检项的内部逻辑">
-      <created>1462831808689</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1462831808689</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19000000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="7000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -585,7 +305,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.52124184" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5220949" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3251634" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -602,29 +322,6 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
-    <MESSAGE value="add root" />
-    <MESSAGE value="1. format code&#10;2. fill the logic of loginController&#10;3. fill the logic of fileController&#10;4. add configuration file to store the static resources or information" />
-    <MESSAGE value="1. 重写了node js服务端架构，确定了node js 服务端运行的整体流程，后期所有代码均可以按照框架思路进行编写。&#10;2. 编写了node端框架部分，为node的代码编写提供便利性。&#10;3. 暂时取消登录验证工作，后期将使用OAuth 2.0实现登录授权验证的逻辑" />
-    <MESSAGE value="1. 在框架中增加了全局异常的捕获机制，避免因为未知异常而导致服务崩溃&#10;2. 新增了参数验证机制，服务可灵活配置参数验证方式，简化逻辑核心代码避免在核心代码中出现过多的参数验证代码。&#10;3. 新增了部分单例模块，实现数据在全代码范围内的共享使用。&#10;4. 新增了异常编码配置，集中规整异常类型。&#10;5. 新增了全局事件监听器，减少代码间的耦合关联。" />
-    <MESSAGE value="框架部分与基版本保持同步" />
-    <MESSAGE value="修改部分巡检项错误的问题&#10;修改巡检配置文件" />
-    <MESSAGE value="删除掉客户端angularjs 部分，后期准备采用angularjs 2.0&#10;修改巡检集合静态对象的逻辑错误。&#10;修改服务状态巡检项的内部逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除掉客户端angularjs 部分，后期准备采用angularjs 2.0&#10;修改巡检集合静态对象的逻辑错误。&#10;修改服务状态巡检项的内部逻辑" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
