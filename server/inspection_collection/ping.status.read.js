@@ -28,28 +28,28 @@ function PingStatusRead(next) {
     inspection.prototype.Run = function run() {
 
         var isFinal = true;
-        var j=0;
+        var j = 0;
 
         console.log("start run the ping status read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
-        for (var i = 0; i <= inspection.ipAddress.length-1; i++) {
+        for (var i = 0; i <= inspection.ipAddress.length - 1; i++) {
             var WmiClient = require('wmi-client');
             var wmi = new WmiClient({
-                username: inspection.username,
-                password: inspection.password,
-                host: inspection.ipAddress[i]
+                username: null,
+                password: null,
+                host: '127.0.0.1'
             });
 
             var constring = 'SELECT Address,PrimaryAddressResolutionStatus FROM Win32_PingStatus where Address ="' + inspection.ipAddress[i] + '"';
             wmi.query(constring, function (err, result) {
                 if (err == null) {
                     j++;
-                    inspection.result=(result[0].PrimaryAddressResolutionStatus);
+                    inspection.result = (result[0].PrimaryAddressResolutionStatus);
                     inspectionResult.FillResult(inspection);
 
-                    if (j == inspection.ipAddress.length ) {
+                    if (j == inspection.ipAddress.length) {
 
                         if (inspection.prototype.Verification(next)) {
                             isFinal = false;
@@ -58,7 +58,7 @@ function PingStatusRead(next) {
 
                         if (isFinal) {
                             var event = require('../../framework/event/event.provider');
-                            event.Publish("onInspectionEnd",inspectionResult.GetResult());
+                            event.Publish("onInspectionEnd", inspectionResult.GetResult());
                         }
                     }
                 } else {

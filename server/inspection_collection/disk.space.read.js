@@ -46,7 +46,7 @@ function DiskSpaceRead(next) {
             wmi.query('SELECT Caption,FreeSpace FROM Win32_LogicalDisk where Caption ="C:"', function (err, result) {
 
                 if (err == null) {
-                    j++
+                    j++;
                     inspection.result=(result[0].FreeSpace / 1073741824);
                     inspectionResult.FillResult(inspection);
 

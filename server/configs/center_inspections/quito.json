@@ -3,15 +3,6 @@
     "group_name": "Common Inspections",
     "inspection_collection": [
       {
-        "aliasname": "cpuRead",
-        "ipAddress": [
-          "10.121.6.1",
-          "10.121.2.21"
-        ],
-        "username": "administrator@uio.ecu911.gob",
-        "password": "cawy_cawy2012"
-      },
-      {
         "aliasname": "diskRead",
         "ipAddress": [
           "10.121.6.1",
@@ -21,7 +12,7 @@
         "password": "cawy_cawy2012"
       },
       {
-        "aliasname": "pingStatus",
+        "aliasname": "cpuRead",
         "ipAddress": [
           "10.121.6.1",
           "10.121.2.21"
@@ -31,6 +22,15 @@
       },
       {
         "aliasname": "memoryRead",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.2.21"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      },
+      {
+        "aliasname": "pingStatus",
         "ipAddress": [
           "10.121.6.1",
           "10.121.2.21"
