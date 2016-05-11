@@ -27,6 +27,7 @@ function CpuUsageRead(next) {
 
     inspection.prototype.Run = function run() {
 
+        var ResultVerify=require('../../server/testingBase_collection/cpuandmemoryresultverify');
         var isFinal = true;
         var j=0;
 
@@ -45,9 +46,15 @@ function CpuUsageRead(next) {
             wmi.query('SELECT Role,LoadPercentage FROM Win32_Processor', function (err, result) {
                 if (err == null) {
                     j++;
-                    inspection.result=(result[0].LoadPercentage);
-                    inspectionResult.FillResult(inspection);
+                    var resultverify = ResultVerify.Check(result[0].LoadPercentage);
+                    inspection.result = {
+                        "server":inspection.ipAddress[j-1],
+                        "result_detail":result[0].LoadPercentage,
+                        "check_status":resultverify,
+                        "description":"cpu usage read"
+                    };
 
+                    inspectionResult.FillResult(inspection);
                     if (j == inspection.ipAddress.length ) {
 
                         if (inspection.prototype.Verification(next)) {

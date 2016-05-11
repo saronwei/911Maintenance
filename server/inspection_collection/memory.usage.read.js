@@ -32,6 +32,7 @@ function MemoryUsageRead(next) {
     inspection.prototype.Run = function run() {
 
         var isFinal = true;
+        var ResultVerify=require('../../server/testingBase_collection/cpuandmemoryresultverify');
 
         console.log("start run the memory usage read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -48,7 +49,13 @@ function MemoryUsageRead(next) {
             wmi.query('SELECT FreePhysicalMemory,TotalVisibleMemorySize FROM Win32_OperatingSystem', function (err, result) {
                 if (err == null) {
                     j++;
-                    inspection.result = (100 - (result[0].FreePhysicalMemory / result[0].TotalVisibleMemorySize * 100));
+                    var resultverify = ResultVerify(100 - (result[0].FreePhysicalMemory / result[0].TotalVisibleMemorySize * 100));
+                    inspection.result = {
+                        "server":inspection.ipAddress[j-1],
+                        "result_detail":100 - (result[0].FreePhysicalMemory / result[0].TotalVisibleMemorySize * 100),
+                        "check_status":resultverify,
+                        "description":"memory usage read"
+                    };
                     inspectionresult.FillResult(inspection);
                     if (j == inspection.ipAddress.length) {
 

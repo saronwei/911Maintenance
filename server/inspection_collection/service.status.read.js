@@ -28,6 +28,8 @@ function ServiceStatusRead(next) {
     inspection.prototype.Run = function run() {
 
         var isFinal = true;
+        var ResultVerify = require('../../server/testingBase_collection/serviestatusresultverify');
+
         console.log("start run the service status read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
@@ -49,7 +51,13 @@ function ServiceStatusRead(next) {
         }
         wmi.query(constring, function (err, result) {
             if (err == null) {
-                inspection.result = result;
+                var resultverify = ResultVerify(result);
+                inspection.result = {
+                    "server":inspection.ipAddress,
+                    "result_detail":result,
+                    "check_status":resultverify,
+                    "description":"service status read"
+                };
 
                 inspectionResult.FillResult(inspection);
 
