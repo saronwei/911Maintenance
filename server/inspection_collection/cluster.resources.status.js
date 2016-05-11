@@ -29,6 +29,7 @@ function ClusterResourceStatus(next) {
 
         var isFinal = true;
         var ResultVerify=require('../../server/testingBase_collection/clusterresstatusresultverify');
+        var resultverify = new ResultVerify();
 
         console.log("start run the cluster resource status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -44,11 +45,11 @@ function ClusterResourceStatus(next) {
         ssh.exec('su - grid', {
             args: ['crsctl status res'],
             exit: function (stdout) {
-                var resultverify = ResultVerify.prototype.Check(stdout);
+                var checkstatus = resultverify.prototype.Check(stdout);
                 inspection.result = {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
-                    "check_status":resultverify,
+                    "check_status":checkstatus,
                     "description":"cluster resource status"
                 }
 

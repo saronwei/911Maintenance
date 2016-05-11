@@ -3,8 +3,8 @@
  */
 function PingStatusResultVerify() {
 
-    if (!(this instanceof Example)) {
-        detector = new Example();
+    if (!(this instanceof PingStatusResultVerify)) {
+        detector = new PingStatusResultVerify();
     }
     else {
         detector = this;
@@ -24,4 +24,4 @@ function PingStatusResultVerify() {
     return detector;
 }
 
-module.exports = Example;
+module.exports = PingStatusResultVerify;

@@ -29,6 +29,7 @@ function ServerStackStatus(next) {
 
         var isFinal = true;
         var ResultVerify = require('../../server/testingBase_collection/oracleserverstatusresultverify');
+        var resultverify = new ResultVerify();
 
         console.log("start run the server stack status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -44,11 +45,11 @@ function ServerStackStatus(next) {
         ssh.exec('su - grid', {
             args: ['crsctl check crs'],
             out: function (stdout) {
-                var resultverify = ResultVerify(stdout);
+                var checkstatus = resultverify.prototype.Check(stdout);
                 inspection.result = {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
-                    "check_status":resultverify,
+                    "check_status":checkstatus,
                     "description":"server stack status"
                 };
 

@@ -3,8 +3,8 @@
  */
 function ServiceStatusResultVerify() {
 
-    if (!(this instanceof Example)) {
-        detector = new Example();
+    if (!(this instanceof ServiceStatusResultVerify)) {
+        detector = new ServiceStatusResultVerify();
     }
     else {
         detector = this;
@@ -26,4 +26,4 @@ function ServiceStatusResultVerify() {
     return detector;
 }
 
-module.exports = Example;
+module.exports = ServiceStatusResultVerify;

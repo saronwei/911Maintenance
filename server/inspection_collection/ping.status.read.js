@@ -28,6 +28,7 @@ function PingStatusRead(next) {
     inspection.prototype.Run = function run() {
 
         var ResultVerify=require('../../server/testingBase_collection/pingstatusresultverify');
+        var resultverify = new ResultVerify();
         var isFinal = true;
         var j = 0;
 
@@ -47,11 +48,11 @@ function PingStatusRead(next) {
             wmi.query(constring, function (err, result) {
                 if (err == null) {
                     j++;
-                    var resultverify = ResultVerify(result[0].PrimaryAddressResolutionStatus);
+                    var checkstatus = resultverify.prototype.Check(result[0].PrimaryAddressResolutionStatus);
                     inspection.result = {
                         "server":inspection.ipAddress[j-1],
                         "result_detail":result[0].PrimaryAddressResolutionStatus,
-                        "check_status":resultverify,
+                        "check_status":checkstatus,
                         "description":"ping status read"
                     };
                     inspectionResult.FillResult(inspection);

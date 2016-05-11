@@ -30,6 +30,7 @@ function NTPTimeServiceStatus(next) {
 
         var isFinal = true;
         var ResultVerify=require('../../server/testingBase_collection/oracleserverstatusresultverify');
+        var resultverify = new ResultVerify();
 
         console.log("start run the NTP time service status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -44,11 +45,11 @@ function NTPTimeServiceStatus(next) {
 
         ssh.exec('service ntpd status', {
         	out:function(stdout){
-                var resultverify = ResultVerify(stdout);
+                var checkstatus = resultverify.prototype.Check(stdout);
         		inspection.result = {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
-                    "check_status":resultverify,
+                    "check_status":checkstatus,
                     "description":"NTP time service status"
                 };
 

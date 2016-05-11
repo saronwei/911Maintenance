@@ -29,6 +29,7 @@ function ClusterSynStatus(next) {
 
         var isFinal = true;
         var ResultVerify=require('../../server/testingBase_collection/oracleserverstatusresultverify');
+        var resultverify = new ResultVerify();
 
         console.log("start run the cluster syn status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -44,11 +45,11 @@ function ClusterSynStatus(next) {
         ssh.exec('su - grid', {
             args: ['crsctl check css'],
             out: function (stdout) {
-                var resultverify = ResultVerify.Check(stdout);
+                var checkstatus = resultverify.prototype.Check(stdout);
                 inspection.result = {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
-                    "check_status":resultverify,
+                    "check_status":checkstatus,
                     "description":"cluster syn status"
                 }
 

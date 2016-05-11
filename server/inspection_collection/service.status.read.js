@@ -29,6 +29,7 @@ function ServiceStatusRead(next) {
 
         var isFinal = true;
         var ResultVerify = require('../../server/testingBase_collection/serviestatusresultverify');
+        var resultverify = new ResultVerify();
 
         console.log("start run the service status read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -51,11 +52,11 @@ function ServiceStatusRead(next) {
         }
         wmi.query(constring, function (err, result) {
             if (err == null) {
-                var resultverify = ResultVerify(result);
+                var checkstatus = resultverify.prototype.Check(result);
                 inspection.result = {
                     "server":inspection.ipAddress,
                     "result_detail":result,
-                    "check_status":resultverify,
+                    "check_status":checkstatus,
                     "description":"service status read"
                 };
 

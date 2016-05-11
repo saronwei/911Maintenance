@@ -28,6 +28,7 @@ function DiskSpaceRead(next) {
     inspection.prototype.Run = function run() {
 
         var ResultVerify=require('../../server/testingBase_collection/diskspaceresultverify');
+        var resultverify = new ResultVerify();
         var isFinal = true;
         var j=0;
 
@@ -48,11 +49,11 @@ function DiskSpaceRead(next) {
 
                 if (err == null) {
                     j++;
-                    var resultverify = ResultVerify(result[0].FreeSpace / 1073741824);
+                    var checkstatus = resultverify.prototype.Check(result[0].FreeSpace / 1073741824);
                     inspection.result = {
                         "server":inspection.ipAddress[j-1],
                         "result_detail":result[0].FreeSpace / 1073741824,
-                        "check_status":resultverify,
+                        "check_status":checkstatus,
                         "description":"disk usage read"
                     };
                     inspectionResult.FillResult(inspection);
