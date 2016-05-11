@@ -50,10 +50,15 @@ function ServerStackStatus(next) {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
                     "check_status":checkstatus,
-                    "description":"server stack status"
+                    "description":inspection.description
                 };
 
-                inspectionResult.FillResult(inspection);
+                inspectionResult.FillResult(inspection.result);
+            },
+            err: function (stderr) {
+                console.log(stderr);
+            },
+            exit:function(stdout){
 
                 if (inspection.prototype.Verification(next)) {
                     isFinal = false;
@@ -64,9 +69,6 @@ function ServerStackStatus(next) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd",inspectionResult.GetResult());
                 }
-            },
-            err: function (stderr) {
-                console.log(stderr);
             }
         }).start();
 

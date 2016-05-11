@@ -57,10 +57,10 @@ function ServiceStatusRead(next) {
                     "server":inspection.ipAddress,
                     "result_detail":result,
                     "check_status":checkstatus,
-                    "description":"service status read"
+                    "description":inspection.description
                 };
 
-                inspectionResult.FillResult(inspection);
+                inspectionResult.FillResult(inspection.result);
 
                 if (inspection.prototype.Verification(next)) {
                     isFinal = false;

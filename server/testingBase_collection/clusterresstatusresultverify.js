@@ -15,8 +15,8 @@ function ClusterResStatusResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        var n = (result.splice("OFFLINE")).length-1;
-        if (n == 2){
+        var n = (result.split("OFFLINE")).length-1;
+        if (n == 4){
             return true;
         }
         return false;

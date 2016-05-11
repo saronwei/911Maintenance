@@ -55,9 +55,9 @@ function MemoryUsageRead(next) {
                         "server":inspection.ipAddress[j-1],
                         "result_detail":100 - (result[0].FreePhysicalMemory / result[0].TotalVisibleMemorySize * 100),
                         "check_status":checkstatus,
-                        "description":"memory usage read"
+                        "description":inspection.description
                     };
-                    inspectionresult.FillResult(inspection);
+                    inspectionresult.FillResult(inspection.result);
                     if (j == inspection.ipAddress.length) {
 
                         if (inspection.prototype.Verification(next)) {

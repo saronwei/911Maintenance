@@ -50,10 +50,10 @@ function ClusterSynStatus(next) {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
                     "check_status":checkstatus,
-                    "description":"cluster syn status"
+                    "description":inspection.description
                 }
 
-                inspectionResult.FillResult(inspection);
+                inspectionResult.FillResult(inspection.result);
 
                 if (inspection.prototype.Verification(next)) {
                     isFinal = false;

@@ -52,10 +52,10 @@ function CpuUsageRead(next) {
                         "server":inspection.ipAddress[j-1],
                         "result_detail":result[0].LoadPercentage,
                         "check_status":checkstatus,
-                        "description":"cpu usage read"
+                        "description":inspection.description
                     };
 
-                    inspectionResult.FillResult(inspection);
+                    inspectionResult.FillResult(inspection.result);
                     if (j == inspection.ipAddress.length ) {
 
                         if (inspection.prototype.Verification(next)) {

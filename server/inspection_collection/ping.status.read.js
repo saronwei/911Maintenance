@@ -53,9 +53,9 @@ function PingStatusRead(next) {
                         "server":inspection.ipAddress[j-1],
                         "result_detail":result[0].PrimaryAddressResolutionStatus,
                         "check_status":checkstatus,
-                        "description":"ping status read"
+                        "description":inspection.description
                     };
-                    inspectionResult.FillResult(inspection);
+                    inspectionResult.FillResult(inspection.result);
 
                     if (j == inspection.ipAddress.length) {
 

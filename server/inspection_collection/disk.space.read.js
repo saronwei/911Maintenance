@@ -54,9 +54,9 @@ function DiskSpaceRead(next) {
                         "server":inspection.ipAddress[j-1],
                         "result_detail":result[0].FreeSpace / 1073741824,
                         "check_status":checkstatus,
-                        "description":"disk usage read"
+                        "description":inspection.description
                     };
-                    inspectionResult.FillResult(inspection);
+                    inspectionResult.FillResult(inspection.result);
 
                     if ( j== inspection.ipAddress.length ) {
 
@@ -70,6 +70,8 @@ function DiskSpaceRead(next) {
                             event.Publish("onInspectionEnd",inspectionResult.GetResult());
                         }
                     }
+                }else{
+                    console.log(err);
                 }
             });
         }
