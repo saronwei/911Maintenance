@@ -11,7 +11,6 @@ function ServiceStatusRead(next) {
     inspection.aliasname = "serviceRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -26,10 +25,12 @@ function ServiceStatusRead(next) {
     };
 
     inspection.prototype.Run = function run() {
-
-        var isFinal = true;
+        var inspectionResult = require('../../resources/storage/inspection.result');
+        var inspectionMgr = require('../../resources/storage/inspection.collection');
         var ResultVerify = require('../../server/testingBase_collection/serviestatusresultverify');
         var resultverify = new ResultVerify();
+        var results = null;
+        var resultList =[];
 
         console.log("start run the service status read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -53,28 +54,39 @@ function ServiceStatusRead(next) {
         wmi.query(constring, function (err, result) {
             if (err == null) {
                 var checkstatus = resultverify.prototype.Check(result);
-                inspection.result = {
+                results = {
                     "server":inspection.ipAddress,
                     "result_detail":result,
                     "check_status":checkstatus,
-                    "description":inspection.description
+                    "description":"service status read"
                 };
-
+                resultList.push(results);
+                inspection.result = {
+                    "Group":'Server Status',
+                    "Result":resultList
+                }
                 inspectionResult.FillResult(inspection.result);
 
-                if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
-                if (isFinal) {
+                if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd", inspectionResult.GetResult());
+                    inspectionMgr = null;
+                    inspectionResult = null
+                    i = null;
+                    results = null
+                    resultList = null;
+                    resultverify = null;
+                    ResultVerify = null;
                 }
             } else {
                 console.log(err);
             }
         });
+
+        wmi = null;
+        if (inspection.prototype.Verification(next)) {
+            next.prototype.Run();
+        }
     };
 
     return inspection;

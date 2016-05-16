@@ -6,35 +6,45 @@
         "aliasname": "diskRead",
         "ipAddress": [
           "10.121.6.1",
-          "10.121.2.21"
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
         ],
         "username": "administrator@uio.ecu911.gob",
-        "password": "cawy_cawy2012"
+        "password": "cawy_cawy2012",
       },
       {
         "aliasname": "cpuRead",
         "ipAddress": [
           "10.121.6.1",
-          "10.121.2.21"
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
         ],
         "username": "administrator@uio.ecu911.gob",
-        "password": "cawy_cawy2012"
+        "password": "cawy_cawy2012",
       },
       {
         "aliasname": "memoryRead",
         "ipAddress": [
           "10.121.6.1",
-          "10.121.2.21"
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
         ],
         "username": "administrator@uio.ecu911.gob",
-        "password": "cawy_cawy2012"
+        "password": "cawy_cawy2012",
       },
       {
         "aliasname": "pingStatus",
         "ipAddress": [
           "10.121.6.1",
-          "10.121.2.21"
-        ]
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
+        ],
+        "username": null,
+        "password": null
       }
     ]
   },

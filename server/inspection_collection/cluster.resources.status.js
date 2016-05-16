@@ -11,7 +11,6 @@ function ClusterResourceStatus(next) {
     inspection.aliasname = "clusterResourceStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -26,11 +25,13 @@ function ClusterResourceStatus(next) {
     };
 
     inspection.prototype.Run = function run() {
-
-        var isFinal = true;
+        var inspectionResult = require('../../resources/storage/inspection.result');
+        var inspectionMgr = require('../../resources/storage/inspection.collection');
         var ResultVerify=require('../../server/testingBase_collection/clusterresstatusresultverify');
         var resultverify = new ResultVerify();
-        var stdoutstring=null;
+        var results = null;
+        var resultList =[];
+        var outString = null;
 
         console.log("start run the cluster resource status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -45,36 +46,44 @@ function ClusterResourceStatus(next) {
 
         ssh.exec('su - grid', {
             args: ['crsctl status res'],
-            out: function (stdout) {
-                stdoutstring = stdoutstring +stdout;
+            exit: function (stdout) {
+                outString = outString + stdout;
             },
             err: function (stderr) {
                 console.log(stderr);
             },
-            exit:function(stdout){
-                var checkstatus = resultverify.prototype.Check(stdoutstring);
-                inspection.result = {
+            exit:function (stdout){
+                var checkStatus = resultverify.Check(outString);
+                results = {
                     "server":inspection.ipAddress,
-                    "result_detail":stdoutstring,
-                    "check_status":checkstatus,
+                    "result_detail":outString,
+                    "check_status":checkStatus,
                     "description":inspection.description
                 }
-
+                resultList.push(results);
+                inspection.result ={
+                    "Group":'Res Status',
+                    "Result":resultList
+                }
                 inspectionResult.FillResult(inspection.result);
 
-                if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
-                if (isFinal) {
+                if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd",inspectionResult.GetResult());
+                    inspectionMgr = null;
+                    inspectionResult = null;
+                    results = null;
+                    resultList = null;
+                    outString = null;
+                    resultverify = null;
+                    ResultVerify = null;
                 }
             }
         }).start();
-
-
+        ssh = null;
+        if (inspection.prototype.Verification(next)) {
+            next.prototype.Run();
+        }
     };
 
     return inspection;
