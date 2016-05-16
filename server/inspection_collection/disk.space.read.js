@@ -11,7 +11,6 @@ function DiskSpaceRead(next) {
     inspection.aliasname = "diskRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -26,9 +25,14 @@ function DiskSpaceRead(next) {
     };
 
     inspection.prototype.Run = function run() {
-
-        var isFinal = true;
-        var j=0;
+        var inspectionResult = require('../../resources/storage/inspection.result');
+        var inspectionMgr = require('../../resources/storage/inspection.collection');
+        var ResultVerify=require('../../server/testingBase_collection/diskspaceresultverify');
+        var WmiClient = require('wmi-client');
+        var resultverify = new ResultVerify();
+        var j = 0;
+        var results = null;
+        var resultList = [];
 
         console.log("start run the disk usage read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -36,7 +40,6 @@ function DiskSpaceRead(next) {
 
         for (var i = 0; i <= inspection.ipAddress.length - 1; i++)
         {
-            var WmiClient = require('wmi-client');
             var wmi = new WmiClient({
                 username: inspection.username,
                 password: inspection.password,
@@ -47,23 +50,41 @@ function DiskSpaceRead(next) {
 
                 if (err == null) {
                     j++;
-                    inspection.result=(result[0].FreeSpace / 1073741824);
-                    inspectionResult.FillResult(inspection);
+                    var checkstatus = resultverify.prototype.Check(result[0].FreeSpace / 1073741824);
+                    results = {
+                        "server":inspection.ipAddress[j-1],
+                        "result_detail":result[0].FreeSpace / 1073741824,
+                        "check_status":checkstatus,
+                        "description":"disk usage read"
+                    };
+                    resultList.push(results);
 
                     if ( j== inspection.ipAddress.length ) {
-
-                        if (inspection.prototype.Verification(next)) {
-                            isFinal = false;
-                            next.prototype.Run();
+                        inspection.result ={
+                            "Group":'Disk',
+                            "Result":resultList
                         }
+                        inspectionResult.FillResult(inspection.result);
 
-                        if (isFinal) {
+                        if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
                             var event = require('../../framework/event/event.provider');
                             event.Publish("onInspectionEnd",inspectionResult.GetResult());
+                            inspectionMgr = null;
+                            inspectionResult = null;
+                            results = null;
+                            resultList = null;
+                            j = null;
+                            resultverify = null;
+                            ResultVerify = null;
                         }
                     }
                 }
             });
+        }
+
+        wmi = null;
+        if (inspection.prototype.Verification(next)) {
+            next.prototype.Run();
         }
     };
 

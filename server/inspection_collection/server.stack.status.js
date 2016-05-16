@@ -11,7 +11,6 @@ function ServerStackStatus(next) {
     inspection.aliasname = "serverStackStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
-    var inspectionResult = require('../../resources/storage/inspection.result');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
@@ -26,8 +25,12 @@ function ServerStackStatus(next) {
     };
 
     inspection.prototype.Run = function run() {
-
-        var isFinal = true;
+        var inspectionResult = require('../../resources/storage/inspection.result');
+        var inspectionMgr = require('../../resources/storage/inspection.collection');
+        var ResultVerify = require('../../server/testingBase_collection/oracleserverstatusresultverify');
+        var resultverify = new ResultVerify();
+        var results = null;
+        var resultList = [];
 
         console.log("start run the server stack status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -43,24 +46,40 @@ function ServerStackStatus(next) {
         ssh.exec('su - grid', {
             args: ['crsctl check crs'],
             out: function (stdout) {
-                inspection.result = stdout;
-
-                inspectionResult.FillResult(inspection);
-
-                if (inspection.prototype.Verification(next)) {
-                    isFinal = false;
-                    next.prototype.Run();
-                }
-
-                if (isFinal) {
-                    var event = require('../../framework/event/event.provider');
-                    event.Publish("onInspectionEnd",inspectionResult.GetResult());
-                }
+                var checkstatus = resultverify.prototype.Check(stdout);
+                results = {
+                    "server":inspection.ipAddress,
+                    "result_detail":stdout,
+                    "check_status":checkstatus,
+                    "description":"server stack status"
+                };
+                resultList.push(results);
             },
             err: function (stderr) {
                 console.log(stderr);
+            },
+            exit:function(stdout){
+                inspection.result = {
+                    "Group":'Crs Status',
+                    "Result":resultList
+                }
+                inspectionResult.FillResult(inspection.result);
+                if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
+                    var event = require('../../framework/event/event.provider');
+                    event.Publish("onInspectionEnd",inspectionResult.GetResult());
+                    inspectionMgr = null;
+                    inspectionResult = null;
+                    results = null;
+                    resultList = null;
+                    resultverify = null;
+                    ResultVerify = null;
+                }
             }
         }).start();
+        ssh = null;
+        if (inspection.prototype.Verification(next)) {
+            next.prototype.Run();
+        }
 
     };
 
