@@ -1,0 +1,11 @@
+{
+  "component": "oracle.component",
+  "dbConnections": [
+    {
+      "instance": "ppchicha",
+      "username": "cawy_cas",
+      "password": "ECU911_db",
+      "connectionString": "10.121.2.2/ppchicha"
+    }
+  ]
+}
