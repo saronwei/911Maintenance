@@ -15,8 +15,15 @@ function HardwareCpuResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        return result < 90;
-        
+        if (result < 90 ){
+            return {
+                "verify_result":"Pass"
+            };
+        }
+        return {
+            "problem_description":"High usage",
+            "verify_result":"Fail criteria"
+        }
     };
 
     return detector;

@@ -15,7 +15,15 @@ function PingStatusResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        return result == 0;
+        if (result == 0){
+            return {
+                "verify_result" : "Pass"
+            }
+        }
+        return {
+            "problem_description":"Network blocked",
+            "verify_result":"Fail criteria"
+        };
         
     };
 

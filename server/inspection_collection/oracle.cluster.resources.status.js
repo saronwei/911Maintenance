@@ -46,28 +46,27 @@ function OracleClusterResourceStatus(next) {
 
         ssh.exec('su - grid', {
             args: ['crsctl status res'],
-            exit: function (stdout) {
+            out: function (stdout) {
                 outString = outString + stdout;
             },
             err: function (stderr) {
                 console.log(stderr);
             },
             exit: function (stdout) {
-                var checkStatus = resultVerify.Check(outString);
                 results = {
                     "server": inspection.ipAddress,
-                    "result_detail": outString,
-                    "check_status": checkStatus,
-                    "description": inspection.description
+                    "check_status": resultVerify.Check(outString),
+                    "description": inspection.description,
+                    "result_detail": outString
                 };
                 resultList.push(results);
                 inspection.result = {
                     "Group": 'Res Status',
                     "Result": resultList
                 };
-                inspectionResult.FillResult(inspection.result);
+                inspectionResult.FillResult(inspectionMgr.GetGroupName(),inspection.result);
 
-                if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
+                if (inspectionMgr.Count() == inspectionResult.GetResultCount()) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd", inspectionResult.GetResult());
                     inspectionMgr = null;

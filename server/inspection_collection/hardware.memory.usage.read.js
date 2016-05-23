@@ -29,15 +29,7 @@ function HardwareMemoryUsageRead(next) {
     };
 
     inspection.prototype.Run = function run() {
-
-        var ResultVerify = require('../testingBase_collection/hardware.cpu.result.verify');
-        var inspectionMgr = require('../../resources/storage/inspection.collection');
-        var inspectionResult = require('../../resources/storage/inspection.result');
         var WmiClient = require('wmi-client');
-        var j = 0;
-        var resultverify = new ResultVerify();
-        var results = null;
-        var resultList = [];
         console.log("start run the memory usage read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
@@ -50,47 +42,54 @@ function HardwareMemoryUsageRead(next) {
             });
 
             wmi.query('SELECT FreePhysicalMemory,TotalVisibleMemorySize FROM Win32_OperatingSystem',
-                function (err, result) {
-                    if (err == null) {
-                        j++;
-                        var checkstatus = resultverify.prototype.Check(100 - (result[0].FreePhysicalMemory / result[0].TotalVisibleMemorySize * 100));
-                        results = {
-                            "server": inspection.ipAddress[j - 1],
-                            "result_detail": 100 - (result[0].FreePhysicalMemory / result[0].TotalVisibleMemorySize * 100),
-                            "check_status": checkstatus,
-                            "description": inspection.description
-                        };
-                        resultList.push(results);
-                        if (j == inspection.ipAddress.length) {
-                            inspection.result = {
-                                "Group": 'Memory',
-                                "Result": resultList
-                            };
-                            inspectionResult.FillResult(inspection.result);
-                            if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
-                                var event = require('../../framework/event/event.provider');
-                                event.Publish("onInspectionEnd", inspectionResult.GetResult());
-                                inspectionMgr = null;
-                                inspectionResult = null;
-                                j = null;
-                                resultList = null;
-                                results = null;
-                                checkstatus = null;
-                                ResultVerify = null;
-                                resultverify = null;
-                            }
-                        }
-                    } else {
-                        console.log(err);
-                    }
-                });
+                callBack);
         }
         wmi = null;
         if (inspection.prototype.Verification(next)) {
             next.prototype.Run();
         }
     };
+    function callBack(err,result){
+        var ResultVerify = require('../testingBase_collection/hardware.cpu.result.verify');
+        var inspectionMgr = require('../../resources/storage/inspection.collection');
+        var inspectionResult = require('../../resources/storage/inspection.result');
+        var j = 0;
+        var resultverify = new ResultVerify();
+        var results = null;
+        var resultList = [];
 
+        if (err == null) {
+            j++;
+            var outresult = 100 - (result[0].FreePhysicalMemory / result[0].TotalVisibleMemorySize * 100);
+            results = {
+                "server": inspection.ipAddress[j - 1],
+                "check_status": resultverify.prototype.Check(outresult),
+                "description": inspection.description,
+                "result_detail": outresult
+            };
+            resultList.push(results);
+            if (j == inspection.ipAddress.length) {
+                inspection.result = {
+                    "Group": 'Memory',
+                    "Result": resultList
+                };
+                inspectionResult.FillResult(inspectionMgr.GetGroupName(),inspection.result);
+                if (inspectionMgr.Count() == inspectionResult.GetResultCount()) {
+                    var event = require('../../framework/event/event.provider');
+                    event.Publish("onInspectionEnd", inspectionResult.GetResult());
+                    inspectionMgr = null;
+                    inspectionResult = null;
+                    j = null;
+                    resultList = null;
+                    results = null;
+                    ResultVerify = null;
+                    resultverify = null;
+                }
+            }
+        } else {
+            console.log(err);
+        }
+    }
     return inspection;
 }
 

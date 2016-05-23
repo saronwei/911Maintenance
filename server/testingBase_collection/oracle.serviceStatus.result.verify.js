@@ -15,7 +15,15 @@ function OracleServiceStatusResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        return !!(result.indexOf("online") > 0 || result.indexOf("running") > 0);
+        if (result.indexOf("online") > 0 || result.indexOf("running") > 0){
+            return{
+                "verify_result":"Pass"
+            }
+        }
+        return {
+            "problem_description":"Server status is wrong",
+            "verify_result": "Fail criteria"
+        };
         
     };
 

@@ -49,9 +49,9 @@ function NTPTimeServiceStatus(next) {
                 var checkstatus = resultverify.prototype.Check(stdout);
         		results = {
                     "server":inspection.ipAddress,
-                    "result_detail":stdout,
                     "check_status":checkstatus,
-                    "description":"NTP time service status"
+                    "description":inspection.description,
+                    "result_detail":stdout
                 };
                 resultList.push(results);
         	},
@@ -63,8 +63,8 @@ function NTPTimeServiceStatus(next) {
                     "Group" : 'NTPD Status',
                     "Result": resultList
                 };
-                inspectionResult.FillResult(inspection.result);
-                if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
+                inspectionResult.FillResult(inspectionMgr.GetGroupName(),inspection.result);
+                if (inspectionMgr.Count() == inspectionResult.GetResultCount()) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd",inspectionResult.GetResult());
                     inspectionMgr = null;

@@ -16,7 +16,15 @@ function OracleResStatusResultVerify() {
 
     detector.prototype.Check = function check(result) {
         var n = (result.split("OFFLINE")).length-1;
-        return n == 4;
+        if(n == 4){
+            return {
+                "verify_result":"Pass"
+            }
+        }
+        return {
+            "problem_description":"Resource Status Error",
+            "verify_result":"Fail criteria"
+        };
         
     };
 

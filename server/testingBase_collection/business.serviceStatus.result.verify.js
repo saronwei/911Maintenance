@@ -14,13 +14,31 @@ function ServiceStatusResultVerify() {
     var BaseDetection = require('../../business_framework/inspection/base.detection');
     detector.prototype = new BaseDetection();
 
-    detector.prototype.Check = function check(result) {
+    detector.prototype.Check = function check(result,serviceName) {
+        var tag = 0;
         for (var i = 0;i <= result.length-1;i++){
-            if (result[i].Started == false){
-                return false;
+            if (serviceName.indexOf(result[i].Name) >= 0){
+                if(result[i].Started == false){
+                    return {
+                        "problem_description":"Server status is wrong,"+"Please check the status.",
+                        "verify_result":"Failed criteria"
+
+                    };
+                }
+                tag++;
             }
         }
-        return true;
+        if (tag == serviceName.length){
+            return {
+                "verify_result": "Pass"
+            };
+        }
+        tag = null;
+        return {
+            "problem_description":"In the name of the service configuration section there is an error,"+
+                "please check the service name is correct",
+            "verify_result":"Failed criteria"
+        };
     };
 
     return detector;

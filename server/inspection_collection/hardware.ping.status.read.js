@@ -25,14 +25,7 @@ function HardwarePingStatusRead(next) {
     };
 
     inspection.prototype.Run = function run() {
-        var inspectionResult = require('../../resources/storage/inspection.result');
-        var ResultVerify = require('../testingBase_collection/hardware.ping.result.verify.js');
-        var inspectionMgr = require('../../resources/storage/inspection.collection');
         var WmiClient = require('wmi-client');
-        var resultVerify = new ResultVerify();
-        var j = 0;
-        var results = null;
-        var resultList = [];
 
         console.log("start run the ping status read inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
@@ -46,41 +39,7 @@ function HardwarePingStatusRead(next) {
             });
 
             var constring = 'SELECT Address,PrimaryAddressResolutionStatus FROM Win32_PingStatus where Address ="' + inspection.ipAddress[i] + '"';
-            wmi.query(constring, function (err, result) {
-                if (err == null) {
-                    j++;
-                    var checkstatus = resultVerify.prototype.Check(result[0].PrimaryAddressResolutionStatus);
-                    results = {
-                        "server": inspection.ipAddress[j - 1],
-                        "result_detail": result[0].PrimaryAddressResolutionStatus,
-                        "check_status": checkstatus,
-                        "description": "ping status read"
-                    };
-                    resultList.push(results);
-
-                    if (j == inspection.ipAddress.length) {
-                        inspection.result = {
-                            "Group": 'Ping',
-                            "Result": resultList
-                        };
-                        inspectionResult.FillResult(inspection.result);
-
-                        if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
-                            var event = require('../../framework/event/event.provider');
-                            event.Publish("onInspectionEnd", inspectionResult.GetResult());
-                            inspectionMgr = null;
-                            inspectionResult = null;
-                            results = null;
-                            resultList = null;
-                            j = null;
-                            resultVerify = null;
-                            ResultVerify = null;
-                        }
-                    }
-                } else {
-                    console.log(err);
-                }
-            });
+            wmi.query(constring, callBack );
         }
 
         wmi = null;
@@ -88,7 +47,47 @@ function HardwarePingStatusRead(next) {
             next.prototype.Run();
         }
     };
+    function callBack(err,result){
+        var inspectionResult = require('../../resources/storage/inspection.result');
+        var ResultVerify = require('../testingBase_collection/hardware.ping.result.verify.js');
+        var inspectionMgr = require('../../resources/storage/inspection.collection');
+        var resultVerify = new ResultVerify();
+        var j = 0;
+        var results = null;
+        var resultList = [];
+        if (err == null) {
+            j++;
+            results = {
+                "server": inspection.ipAddress[j - 1],
+                "check_status": resultVerify.prototype.Check(result[0].PrimaryAddressResolutionStatus),
+                "description": inspection.description,
+                "result_detail": result[0].PrimaryAddressResolutionStatus
+            };
+            resultList.push(results);
 
+            if (j == inspection.ipAddress.length) {
+                inspection.result = {
+                    "Group": 'Ping',
+                    "Result": resultList
+                };
+                inspectionResult.FillResult(inspectionMgr.GetGroupName(),inspection.result);
+
+                if (inspectionMgr.Count() == inspectionResult.GetResultCount()) {
+                    var event = require('../../framework/event/event.provider');
+                    event.Publish("onInspectionEnd", inspectionResult.GetResult());
+                    inspectionMgr = null;
+                    inspectionResult = null;
+                    results = null;
+                    resultList = null;
+                    j = null;
+                    resultVerify = null;
+                    ResultVerify = null;
+                }
+            }
+        } else {
+            console.log(err);
+        }
+    }
     return inspection;
 }
 

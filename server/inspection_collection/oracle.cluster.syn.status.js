@@ -49,9 +49,9 @@ function OracleClusterSynStatus(next) {
                 var checkstatus = resultverify.prototype.Check(stdout);
                 results = {
                     "server":inspection.ipAddress,
-                    "result_detail":stdout,
                     "check_status":checkstatus,
-                    "description":"cluster syn status"
+                    "description":inspection.description,
+                    "result_detail":stdout
                 };
                 resultList.push(results);
             },
@@ -63,8 +63,8 @@ function OracleClusterSynStatus(next) {
                     "Group":'Crs Status',
                     "Result":resultList
                 };
-                inspectionResult.FillResult(inspection.result);
-                if (inspecionMgr.Count() == inspectionResult.GetResult().length) {
+                inspectionResult.FillResult(inspecionMgr.GetGroupName(),inspection.result);
+                if (inspecionMgr.Count() == inspectionResult.GetResultCount()) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd",inspectionResult.GetResult());
                     inspecionMgr = null;
