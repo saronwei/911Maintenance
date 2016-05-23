@@ -9,6 +9,7 @@ function InspectionStore() {
 
     return {
         Count: count,
+        GetGroupName:getGroupName,
         GetInspections: getInspections,
         PushToInspections: pushToInspections
     };
@@ -21,15 +22,19 @@ function InspectionStore() {
         return collection;
     }
 
+    function getGroupName() {
+        return collection[0].groupName;
+    }
+
     function pushToInspections(group) {
 
         var result = linq.from(collection).where(function (item) {
-            //noinspection JSUnresolvedVariable
             return item ? item.inspection == group.inspection : false;
         }).toArray();
         if (result.length == 0) {
             collection.push(group);
         }
+        result = null;
     }
 }
 

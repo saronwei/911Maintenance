@@ -1,21 +1,21 @@
-function ClusterResourceStatus(next) {
+function OracleClusterSynStatus(next) {
 
-    if (!(this instanceof ClusterResourceStatus)) {
-        inspection = new ClusterResourceStatus(next);
+    if (!(this instanceof OracleClusterSynStatus)) {
+        inspection = new OracleClusterSynStatus(next);
     }
     else {
         inspection = this;
     }
 
     var inspection;
-    inspection.aliasname = "clusterResourceStatus";
+    inspection.aliasname = "OracleClusterSynStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
 
-        inspection.description = "Read the cluster resource status for the oracle";
+        inspection.description = "Read the cluster syn status for the oracle";
         inspection.tags = ["oracle_resource"];
         inspection.result = null;
 
@@ -26,14 +26,13 @@ function ClusterResourceStatus(next) {
 
     inspection.prototype.Run = function run() {
         var inspectionResult = require('../../resources/storage/inspection.result');
-        var inspectionMgr = require('../../resources/storage/inspection.collection');
-        var ResultVerify=require('../../server/testingBase_collection/clusterresstatusresultverify');
+        var inspecionMgr = require('../../resources/storage/inspection.collection');
+        var ResultVerify=require('../testingBase_collection/oracle.serviceStatus.result.verify.js');
         var resultverify = new ResultVerify();
         var results = null;
         var resultList =[];
-        var outString = null;
 
-        console.log("start run the cluster resource status inspection");
+        console.log("start run the cluster syn status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
@@ -45,48 +44,47 @@ function ClusterResourceStatus(next) {
         });
 
         ssh.exec('su - grid', {
-            args: ['crsctl status res'],
-            exit: function (stdout) {
-                outString = outString + stdout;
+            args: ['crsctl check css'],
+            out: function (stdout) {
+                var checkstatus = resultverify.prototype.Check(stdout);
+                results = {
+                    "server":inspection.ipAddress,
+                    "result_detail":stdout,
+                    "check_status":checkstatus,
+                    "description":"cluster syn status"
+                };
+                resultList.push(results);
             },
             err: function (stderr) {
                 console.log(stderr);
             },
             exit:function (stdout){
-                var checkStatus = resultverify.Check(outString);
-                results = {
-                    "server":inspection.ipAddress,
-                    "result_detail":outString,
-                    "check_status":checkStatus,
-                    "description":inspection.description
-                }
-                resultList.push(results);
-                inspection.result ={
-                    "Group":'Res Status',
+                inspection.result = {
+                    "Group":'Crs Status',
                     "Result":resultList
-                }
+                };
                 inspectionResult.FillResult(inspection.result);
-
-                if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
+                if (inspecionMgr.Count() == inspectionResult.GetResult().length) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd",inspectionResult.GetResult());
-                    inspectionMgr = null;
+                    inspecionMgr = null;
                     inspectionResult = null;
                     results = null;
                     resultList = null;
-                    outString = null;
                     resultverify = null;
                     ResultVerify = null;
                 }
             }
         }).start();
+
         ssh = null;
         if (inspection.prototype.Verification(next)) {
             next.prototype.Run();
         }
+
     };
 
     return inspection;
 }
 
-module.exports = ClusterResourceStatus;
+module.exports = OracleClusterSynStatus;

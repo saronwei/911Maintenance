@@ -16,6 +16,7 @@
     "serve-favicon": "~2.3.0",
     "linq": "latest",
     "simple-ssh": "latest",
-    "wmi-client": "latest"
+    "wmi-client": "latest",
+    "oracledb": "latest"
   }
 }

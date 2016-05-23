@@ -1,10 +1,10 @@
 /**
  * Created by cnyygydsk on 2016/5/10.
  */
-function CpuAndMomeryResultVerify() {
+function OracleServiceStatusResultVerify() {
 
-    if (!(this instanceof CpuAndMomeryResultVerify)) {
-        detector = new CpuAndMomeryResultVerify();
+    if (!(this instanceof OracleServiceStatusResultVerify)) {
+        detector = new OracleServiceStatusResultVerify();
     }
     else {
         detector = this;
@@ -15,13 +15,11 @@ function CpuAndMomeryResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        if (result < 90){
-            return true ;
-        }
-        return false;
+        return !!(result.indexOf("online") > 0 || result.indexOf("running") > 0);
+        
     };
 
     return detector;
 }
 
-module.exports = CpuAndMomeryResultVerify;
+module.exports = OracleServiceStatusResultVerify;

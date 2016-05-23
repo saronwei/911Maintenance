@@ -100,7 +100,7 @@ function InspectionManager(center) {
 
     function runGroup(groupName) {
 
-        var current, next = null;
+        var current, next;
         var inspectionCollection = require('../../resources/storage/inspection.collection');
         organizeInspections(groupName);
 

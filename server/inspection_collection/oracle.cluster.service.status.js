@@ -1,14 +1,14 @@
-function ServerStackStatus(next) {
+function OracleClusterServiceStatus(next) {
 
-    if (!(this instanceof ServerStackStatus)) {
-        inspection = new ServerStackStatus(next);
+    if (!(this instanceof OracleClusterServiceStatus)) {
+        inspection = new OracleClusterServiceStatus(next);
     }
     else {
         inspection = this;
     }
 
     var inspection;
-    inspection.aliasname = "serverStackStatus";
+    inspection.aliasname = "OracleClusterServiceStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     inspection.prototype = new BaseInspection();
@@ -27,8 +27,8 @@ function ServerStackStatus(next) {
     inspection.prototype.Run = function run() {
         var inspectionResult = require('../../resources/storage/inspection.result');
         var inspectionMgr = require('../../resources/storage/inspection.collection');
-        var ResultVerify = require('../../server/testingBase_collection/oracleserverstatusresultverify');
-        var resultverify = new ResultVerify();
+        var ResultVerify = require('../testingBase_collection/oracle.serviceStatus.result.verify.js');
+        var resultVerify = new ResultVerify();
         var results = null;
         var resultList = [];
 
@@ -46,7 +46,7 @@ function ServerStackStatus(next) {
         ssh.exec('su - grid', {
             args: ['crsctl check crs'],
             out: function (stdout) {
-                var checkstatus = resultverify.prototype.Check(stdout);
+                var checkstatus = resultVerify.prototype.Check(stdout);
                 results = {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
@@ -62,7 +62,7 @@ function ServerStackStatus(next) {
                 inspection.result = {
                     "Group":'Crs Status',
                     "Result":resultList
-                }
+                };
                 inspectionResult.FillResult(inspection.result);
                 if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
                     var event = require('../../framework/event/event.provider');
@@ -71,7 +71,7 @@ function ServerStackStatus(next) {
                     inspectionResult = null;
                     results = null;
                     resultList = null;
-                    resultverify = null;
+                    resultVerify = null;
                     ResultVerify = null;
                 }
             }
@@ -86,4 +86,4 @@ function ServerStackStatus(next) {
     return inspection;
 }
 
-module.exports = ServerStackStatus;
+module.exports = OracleClusterServiceStatus;

@@ -27,8 +27,8 @@ function FileDetector() {
                     probe(sourcePath, filename, option, callback);
                 }
                 else {
-                    if (utils.isNullOrUndefined(filename) && filename != "") {
-                        if (file.toString().indexOf(filename) > 0) {
+                    if (!utils.isNullOrUndefined(filename) && filename != "") {
+                        if (file === filename) {
                             callback(require(path.join(sourcePath, file)));
                             file = null;
                             return;

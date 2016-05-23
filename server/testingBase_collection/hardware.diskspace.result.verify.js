@@ -15,10 +15,8 @@ function DiskSpaceResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        if (result > 15){
-            return true;
-        }
-        return false;
+        return result > 15;
+        
     };
 
     return detector;

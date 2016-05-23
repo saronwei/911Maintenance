@@ -1,10 +1,10 @@
 /**
  * Created by cnyygydsk on 2016/5/10.
  */
-function PingStatusResultVerify() {
+function OracleResStatusResultVerify() {
 
-    if (!(this instanceof PingStatusResultVerify)) {
-        detector = new PingStatusResultVerify();
+    if (!(this instanceof OracleResStatusResultVerify)) {
+        detector = new OracleResStatusResultVerify();
     }
     else {
         detector = this;
@@ -15,13 +15,12 @@ function PingStatusResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        if (result == 0){
-            return true;
-        }
-        return false;
+        var n = (result.split("OFFLINE")).length-1;
+        return n == 4;
+        
     };
 
     return detector;
 }
 
-module.exports = PingStatusResultVerify;
+module.exports = OracleResStatusResultVerify;

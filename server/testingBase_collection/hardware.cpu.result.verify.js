@@ -1,10 +1,10 @@
 /**
  * Created by cnyygydsk on 2016/5/10.
  */
-function ClusterResStatusResultVerify() {
+function HardwareCpuResultVerify() {
 
-    if (!(this instanceof ClusterResStatusResultVerify)) {
-        detector = new ClusterResStatusResultVerify();
+    if (!(this instanceof HardwareCpuResultVerify)) {
+        detector = new HardwareCpuResultVerify();
     }
     else {
         detector = this;
@@ -15,14 +15,11 @@ function ClusterResStatusResultVerify() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        var n = (result.split("OFFLINE")).length-1;
-        if (n == 4){
-            return true;
-        }
-        return false;
+        return result < 90;
+        
     };
 
     return detector;
 }
 
-module.exports = ClusterResStatusResultVerify;
+module.exports = HardwareCpuResultVerify;

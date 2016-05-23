@@ -26,16 +26,16 @@ function ComponentManager() {
             callback(null);
             return;
         }
-        var storage = require('../../resources/storage/component.permanent.collection');
-        var provider = storage['GetComponent'](packageName);
-        if (!utils.isNullOrUndefined(provider) && provider != "") {
-            callback(provider);
-            return;
-        }
+        // var storage = require('../../resources/storage/component.permanent.collection');
+        // var provider = storage['GetComponent'](packageName);
+        // if (!utils.isNullOrUndefined(provider) && provider != "") {
+        //     callback(provider);
+        //     return;
+        // }
 
         var fileDetector = require('../file/file.detector')();
-        fileDetector.Probe(path.join('../../resources/component_collection/', packageName),
-            "component.conf", null,
+        fileDetector.Probe(path.join(process.cwd(), 'resources/component_collection', packageName),
+            "component.conf.json", null,
             function initializeCore(config) {
 
                 if (!utils.isNullOrUndefined(config)) {
@@ -46,21 +46,23 @@ function ComponentManager() {
                     }
                     var component = require(path.join('../../resources/component_collection/', packageName, name))();
                     if (component.prototype && component.prototype.hasOwnProperty('Initialize')) {
-                        component.prototype.Initialize(option, function (err, providerInstance) {
+                        component.prototype.Initialize(config, option, function (err, providerInstance) {
                             if (err) {
                                 callback(null);
                                 return;
                             }
-                            if (!utils.isNullOrUndefined(providerInstance)) {
-                                storage['PushToCollection'](name, providerInstance);
-                                storage = null;
-                            }
+                            // if (!utils.isNullOrUndefined(providerInstance)) {
+                            //     storage['PushToCollection'](name, providerInstance);
+                            // }
                             callback(!utils.isNullOrUndefined(providerInstance) ? providerInstance : null);
                         });
                     }
                     else {
                         callback(null);
                     }
+                }
+                else {
+                    callback(null);
                 }
             });
 

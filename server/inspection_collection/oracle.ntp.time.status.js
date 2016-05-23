@@ -1,21 +1,22 @@
-function ClusterSynStatus(next) {
+function NTPTimeServiceStatus(next) {
 
-    if (!(this instanceof ClusterSynStatus)) {
-        inspection = new ClusterSynStatus(next);
+    if (!(this instanceof NTPTimeServiceStatus)) {
+        inspection = new NTPTimeServiceStatus(next);
     }
     else {
         inspection = this;
     }
 
     var inspection;
-    inspection.aliasname = "clusterSynStatus";
+    inspection.aliasname = "NTPTimeServiceStatus";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     inspection.prototype = new BaseInspection();
 
     inspection.prototype.Configure = function configure(outConfig) {
 
-        inspection.description = "Read the cluster syn status for the oracle";
+        inspection.description = "Read the NTP Time service status for the oracle";
+
         inspection.tags = ["oracle_resource"];
         inspection.result = null;
 
@@ -26,48 +27,47 @@ function ClusterSynStatus(next) {
 
     inspection.prototype.Run = function run() {
         var inspectionResult = require('../../resources/storage/inspection.result');
-        var inspecionMgr = require('../../resources/storage/inspection.collection');
-        var ResultVerify=require('../../server/testingBase_collection/oracleserverstatusresultverify');
+        var inspectionMgr = require('../../resources/storage/inspection.collection');
+        var ResultVerify = require('../testingBase_collection/oracle.serviceStatus.result.verify.js');
         var resultverify = new ResultVerify();
-        var results = null;
-        var resultList =[];
+        var results= null;
+        var resultList = [];
 
-        console.log("start run the cluster syn status inspection");
+        console.log("start run the NTP time service status inspection");
         // todo: write core logic here, the isFinal logic is used for callback inner,
         // at last i suppose that every logic should be use the callback to return the inspection result
 
         var SSH = require('simple-ssh');
         var ssh = new SSH({
-            host: inspection.ipAddress,
-            user: inspection.username,
-            pass: inspection.password
+        	host:inspection.ipAddress,
+        	user:inspection.username,
+        	pass:inspection.password
         });
 
-        ssh.exec('su - grid', {
-            args: ['crsctl check css'],
-            out: function (stdout) {
+        ssh.exec('service ntpd status', {
+        	out:function(stdout){
                 var checkstatus = resultverify.prototype.Check(stdout);
-                results = {
+        		results = {
                     "server":inspection.ipAddress,
                     "result_detail":stdout,
                     "check_status":checkstatus,
-                    "description":"cluster syn status"
-                }
+                    "description":"NTP time service status"
+                };
                 resultList.push(results);
-            },
-            err: function (stderr) {
-                console.log(stderr);
-            },
+        	},
+        	err:function (stderr) {
+        		console.log(stderr);
+        	},
             exit:function (stdout){
                 inspection.result = {
-                    "Group":'Crs Status',
-                    "Result":resultList
-                }
+                    "Group" : 'NTPD Status',
+                    "Result": resultList
+                };
                 inspectionResult.FillResult(inspection.result);
-                if (inspecionMgr.Count() == inspectionResult.GetResult().length) {
+                if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd",inspectionResult.GetResult());
-                    inspecionMgr = null;
+                    inspectionMgr = null;
                     inspectionResult = null;
                     results = null;
                     resultList = null;
@@ -76,15 +76,13 @@ function ClusterSynStatus(next) {
                 }
             }
         }).start();
-
         ssh = null;
         if (inspection.prototype.Verification(next)) {
             next.prototype.Run();
         }
-
     };
 
     return inspection;
 }
 
-module.exports = ClusterSynStatus;
+module.exports = NTPTimeServiceStatus;

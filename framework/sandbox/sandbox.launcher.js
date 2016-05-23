@@ -5,7 +5,7 @@
 /*
  * async method shell, provider the error catch of the async callback etc
  */
-function SandBox(fn, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
+function SandBox(fn, arg1, arg2, arg3, arg4, arg5, arg6, arg7, callback) {
 
     var d = require('domain').create();
 
@@ -14,13 +14,18 @@ function SandBox(fn, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
     });
 
     d.run(function () {
-        fn(arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        fn(arg1, arg2, arg3, arg4, arg5, arg6, arg7, callback);
     });
 
     return {
         Release: function release() {
             fn = null;
             d = null;
+        },
+        Include: function include(asyncObj){
+            "use strict";
+
+            d.add(asyncObj);
         }
     }
 }

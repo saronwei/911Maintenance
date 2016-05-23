@@ -1,14 +1,14 @@
-function ServiceStatusRead(next) {
+function BusinessServiceStatusRead(next) {
 
-    if (!(this instanceof ServiceStatusRead)) {
-        inspection = new ServiceStatusRead(next);
+    if (!(this instanceof BusinessServiceStatusRead)) {
+        inspection = new BusinessServiceStatusRead(next);
     }
     else {
         inspection = this;
     }
 
     var inspection;
-    inspection.aliasname = "serviceRead";
+    inspection.aliasname = "BusinessServiceStatusRead";
     var utils = require('util');
     var BaseInspection = require('../../business_framework/inspection/base.inspection');
     inspection.prototype = new BaseInspection();
@@ -27,8 +27,8 @@ function ServiceStatusRead(next) {
     inspection.prototype.Run = function run() {
         var inspectionResult = require('../../resources/storage/inspection.result');
         var inspectionMgr = require('../../resources/storage/inspection.collection');
-        var ResultVerify = require('../../server/testingBase_collection/serviestatusresultverify');
-        var resultverify = new ResultVerify();
+        var ResultVerify = require('../testingBase_collection/business.serviceStatus.result.verify');
+        var resultVerify = new ResultVerify();
         var results = null;
         var resultList =[];
 
@@ -53,7 +53,7 @@ function ServiceStatusRead(next) {
         }
         wmi.query(constring, function (err, result) {
             if (err == null) {
-                var checkstatus = resultverify.prototype.Check(result);
+                var checkstatus = resultVerify.prototype.Check(result);
                 results = {
                     "server":inspection.ipAddress,
                     "result_detail":result,
@@ -64,18 +64,18 @@ function ServiceStatusRead(next) {
                 inspection.result = {
                     "Group":'Server Status',
                     "Result":resultList
-                }
+                };
                 inspectionResult.FillResult(inspection.result);
 
                 if (inspectionMgr.Count() == inspectionResult.GetResult().length) {
                     var event = require('../../framework/event/event.provider');
                     event.Publish("onInspectionEnd", inspectionResult.GetResult());
                     inspectionMgr = null;
-                    inspectionResult = null
+                    inspectionResult = null;
                     i = null;
-                    results = null
+                    results = null;
                     resultList = null;
-                    resultverify = null;
+                    resultVerify = null;
                     ResultVerify = null;
                 }
             } else {
@@ -92,4 +92,4 @@ function ServiceStatusRead(next) {
     return inspection;
 }
 
-module.exports = ServiceStatusRead;
+module.exports = BusinessServiceStatusRead;

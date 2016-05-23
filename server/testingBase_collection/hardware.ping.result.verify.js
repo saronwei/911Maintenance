@@ -1,11 +1,10 @@
 /**
- * Created by Saron on 2016/5/11.
+ * Created by cnyygydsk on 2016/5/10.
  */
+function PingStatusResultVerify() {
 
-function Example() {
-
-    if (!(this instanceof Example)) {
-        detector = new Example();
+    if (!(this instanceof PingStatusResultVerify)) {
+        detector = new PingStatusResultVerify();
     }
     else {
         detector = this;
@@ -16,10 +15,11 @@ function Example() {
     detector.prototype = new BaseDetection();
 
     detector.prototype.Check = function check(result) {
-        return false;
+        return result == 0;
+        
     };
 
     return detector;
 }
 
-module.exports = Example;
+module.exports = PingStatusResultVerify;
