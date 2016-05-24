@@ -7,6 +7,9 @@ function HardwarePingStatusRead(next) {
         inspection = this;
     }
 
+    var j = 0;
+    var results = null;
+    var resultList = [];
     var inspection;
     inspection.aliasname = "HardwarePingStatusRead";
     var utils = require('util');
@@ -52,9 +55,8 @@ function HardwarePingStatusRead(next) {
         var ResultVerify = require('../testingBase_collection/hardware.ping.result.verify.js');
         var inspectionMgr = require('../../resources/storage/inspection.collection');
         var resultVerify = new ResultVerify();
-        var j = 0;
-        var results = null;
-        var resultList = [];
+
+
         if (err == null) {
             j++;
             results = {

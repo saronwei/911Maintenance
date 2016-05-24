@@ -11,6 +11,9 @@ function HardwareMemoryUsageRead(next) {
         inspection = this;
     }
 
+    var j = 0;
+    var results = null;
+    var resultList = [];
     var inspection;
     inspection.aliasname = "HardwareMemoryUsageRead";
     var utils = require('util');
@@ -53,10 +56,9 @@ function HardwareMemoryUsageRead(next) {
         var ResultVerify = require('../testingBase_collection/hardware.cpu.result.verify');
         var inspectionMgr = require('../../resources/storage/inspection.collection');
         var inspectionResult = require('../../resources/storage/inspection.result');
-        var j = 0;
+
         var resultverify = new ResultVerify();
-        var results = null;
-        var resultList = [];
+
 
         if (err == null) {
             j++;

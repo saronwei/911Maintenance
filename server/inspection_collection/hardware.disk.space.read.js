@@ -7,6 +7,9 @@ function HardwareDiskSpaceRead(next) {
         inspection = this;
     }
 
+    var j = 0;
+    var results = null;
+    var resultList = [];
     var inspection;
     inspection.aliasname = "HardwareDiskSpaceRead";
     var utils = require('util');
@@ -51,9 +54,8 @@ function HardwareDiskSpaceRead(next) {
         var inspectionMgr = require('../../resources/storage/inspection.collection');
         var ResultVerify = require('../testingBase_collection/hardware.diskspace.result.verify.js');
         var resultVerify = new ResultVerify();
-        var j = 0;
-        var results = null;
-        var resultList = [];
+
+
 
         if (err == null) {
             j++;

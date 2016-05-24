@@ -7,6 +7,9 @@ function HardwareCpuUsageRead(next) {
         inspection = this;
     }
 
+    var j = 0;
+    var results = null
+    var resultList = [];
     var inspection;
     inspection.aliasname = "HardwareCpuUsageRead";
     var utils = require('util');
@@ -49,9 +52,8 @@ function HardwareCpuUsageRead(next) {
         var inspectionMgr = require('../../resources/storage/inspection.collection');
         var ResultVerify = require('../testingBase_collection/hardware.cpu.result.verify');
         var resultVerify = new ResultVerify();
-        var results = null
-        var resultList = [];
-        var j = 0;
+
+
         if (err == null) {
             j++;
             results = {

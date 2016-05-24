@@ -55,7 +55,7 @@ function OracleClusterResourceStatus(next) {
             exit: function (stdout) {
                 results = {
                     "server": inspection.ipAddress,
-                    "check_status": resultVerify.Check(outString),
+                    "check_status": resultVerify.prototype.Check(outString),
                     "description": inspection.description,
                     "result_detail": outString
                 };
