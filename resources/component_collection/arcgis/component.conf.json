@@ -2,7 +2,7 @@
   "component": "arcgis.component",
   "servers": [
     {
-      "hostname": "192.168.1.16",
+      "hostname": "10.121.2.21",
       "port": "6080",
       "headers": {
         "Cache-Control": "no-cache",
@@ -11,9 +11,9 @@
       },
       "authorization": {
         "username": "siteadmin",
-        "password": "siteadmin",
+        "password": "ECU911@ECU911",
         "client": "IP",
-        "ip": "192.168.1.15",
+        "ip": "10.121.0.88",
         "expiration": "60"
       }
     }

@@ -9,9 +9,10 @@ function InspectionStore() {
 
     return {
         Count: count,
-        GetGroupName:getGroupName,
+        GetGroupName: getGroupName,
         GetInspections: getInspections,
-        PushToInspections: pushToInspections
+        PushToInspections: pushToInspections,
+        Clear: clear
     };
 
     function count() {
@@ -35,6 +36,11 @@ function InspectionStore() {
             collection.push(group);
         }
         result = null;
+    }
+
+    function clear() {
+        collection = null;
+        collection = [];
     }
 }
 

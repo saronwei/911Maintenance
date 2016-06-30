@@ -55,7 +55,7 @@ function BusinessServiceStatusRead(next) {
                 "server":inspection.ipAddress,
                 "check_status":resultVerify.prototype.Check(result,inspection.serviceName),
                 "description":inspection.description,
-                "result_detail":null,
+                "result_detail":null
             };
             inspectionResult.FillResult(inspectionMgr.GetGroupName(),inspection.result);
 

@@ -68,29 +68,29 @@
     "inspection_collection": [
       {
         "aliasname": "ArcgisBusyTimeCheck",
-        "hostname": "192.168.1.16",
+        "hostname": "10.121.2.21",
         "port": "6080",
-        "path": "/arcgis/admin/services//SampleWorldCities.MapServer/statistics?"
+        "path": "/arcgis/admin/services//ppchicha.MapServer/statistics?"
       },
       {
         "aliasname": "ArcgisClusterStatusCheck",
-        "hostname": "192.168.1.16",
+        "hostname": "10.121.2.21",
         "port": "6080",
         "path": "/arcgis/admin/clusters/default/machines?"
       },
       {
         "aliasname": "ArcgisErrorLogRead",
-        "hostname": "192.168.1.16",
+        "hostname": "10.121.2.21",
         "port": "6080",
         "method": "POST",
         "path": "/arcgis/admin/logs/query?"
       },
       {
         "aliasname": "ArcgisServiceStatusRead",
-        "hostname": "192.168.1.16",
+        "hostname": "10.121.2.21",
         "port": "6080",
         "method": "POST",
-        "path": "/arcgis/admin/services/SampleWorldCities.MapServer/status?"
+        "path": "/arcgis/admin/services/ppchicha.MapServer/status?"
       }
     ]
   },

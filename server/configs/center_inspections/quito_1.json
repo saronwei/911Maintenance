@@ -1,0 +1,141 @@
+[
+  {
+    "group_name": "Hardware Inspections",
+    "inspection_collection": [
+      {
+        "aliasname": "HardwareDiskSpaceRead",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      },
+      {
+        "aliasname": "HardwareCpuUsageRead",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      },
+      {
+        "aliasname": "HardwareMemoryUsageRead",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
+        ],
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012"
+      },
+      {
+        "aliasname": "HardwarePingStatusRead",
+        "ipAddress": [
+          "10.121.6.1",
+          "10.121.6.2",
+          "10.121.2.21",
+          "10.121.2.22"
+        ],
+        "username": null,
+        "password": null
+      }
+    ]
+  },
+  {
+    "group_name": "Business Service Inspection",
+    "inspection_collection": [
+      {
+        "aliasname": "BusinessServiceStatusRead",
+        "ipAddress": "10.121.6.1",
+        "username": "administrator@uio.ecu911.gob",
+        "password": "cawy_cawy2012",
+        "serviceName": [
+          "Gs.Cas.WCF.Province.BusinessExchange.Hosting",
+          "Gs.Cas.WCF.Province.CooperationPlot.Hosting",
+          "Gs.Cas.WCF.Province.IncidentAppealAssign.Hosting",
+          "Gs.Cas.WCF.Province.IncidentAppealDisposal.Hosting",
+          "Gs.Cas.WCF.Province.Phone.Hosting",
+          "Gs.Cas.WCF.Province.ThirdPartyIntegration.Hosting",
+          "Gs.Wcf.Hosting.Province.BusinessAppService",
+          "Gs.Wcf.Hosting.Province.GeoDatabaseAppService"
+        ]
+      }
+    ]
+  },
+  {
+    "group_name": "Arcgis Server Health Inspection",
+    "inspection_collection": [
+      {
+        "aliasname": "ArcgisBusyTimeCheck",
+        "hostname": "192.168.8.122",
+        "port": "6080",
+        "path": "/arcgis/admin/services//SampleWorldCities.MapServer/statistics?"
+      },
+      {
+        "aliasname": "ArcgisClusterStatusCheck",
+        "hostname": "192.168.8.122",
+        "port": "6080",
+        "path": "/arcgis/admin/clusters/default/machines?"
+      },
+      {
+        "aliasname": "ArcgisErrorLogRead",
+        "hostname": "192.168.8.122",
+        "port": "6080",
+        "method": "POST",
+        "path": "/arcgis/admin/logs/query?"
+      },
+      {
+        "aliasname": "ArcgisServiceStatusRead",
+        "hostname": "192.168.8.122",
+        "port": "6080",
+        "method": "POST",
+        "path": "/arcgis/admin/services/SampleWorldCities.MapServer/status?"
+      }
+    ]
+  },
+  {
+    "group_name": "Oracle RAC Environment Inspection",
+    "inspection_collection": [
+      {
+        "aliasname": "OracleClusterServiceStatus",
+        "ipAddress": "10.121.2.1",
+        "username": "root",
+        "password": "p@ssw0rd"
+      },
+      {
+        "aliasname": "OracleClusterSynStatus",
+        "ipAddress": "10.121.2.1",
+        "username": "root",
+        "password": "p@ssw0rd"
+      },
+      {
+        "aliasname": "OracleClusterResourceStatus",
+        "ipAddress": "10.121.2.1",
+        "username": "root",
+        "password": "p@ssw0rd"
+      },
+      {
+        "aliasname": "NTPTimeServiceStatus",
+        "ipAddress": "10.121.2.1",
+        "username": "root",
+        "password": "p@ssw0rd"
+      }
+    ]
+  },
+  {
+    "group_name": "Oracle Database Health Inspection",
+    "inspection_collection": [
+      {
+        "aliasname": "OracleFileAutoExtensibleCheck",
+        "instanceName": "ppchicha"
+      }
+    ]
+  }
+]

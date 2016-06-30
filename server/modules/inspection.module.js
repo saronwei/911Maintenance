@@ -19,6 +19,8 @@ function InspectionModule() {
 
         instance.prototype.RouteManager.RouteConfigure(app,
             "/api/inspection/run", require('../routes/inspection/inspection.route'));
+        instance.prototype.RouteManager.RouteConfigure(app,
+            "/api/inspection/getItems", require('../routes/inspection_environment/inspection.environment.route'));
 
         instance.prototype.RouteManager = null;
         app = null;
